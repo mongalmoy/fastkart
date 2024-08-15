@@ -6,6 +6,10 @@
   height: var(--header-nav-height);
   padding-right: 60px;
   padding-left: 60px;
+  position: fixed;
+  top: var(--header-height);
+  width: 100%;
+  z-index: 99;
 }
 .app_logo {
   font-size: 28px;
