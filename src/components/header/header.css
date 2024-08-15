@@ -1,0 +1,32 @@
+.header {
+  background-color: var(--header-bg);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 60px;
+  padding-left: 60px;
+}
+.welcome {
+  background-color: #fff;
+  color: var(--header-bg);
+  width: 140px;
+  height: 40px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 800;
+  border: none;
+  outline: none;
+}
+.header_item {
+  font-size: 14px;
+  font-weight: 600px;
+  color: #fff;
+}
+.header_links {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 14px;
+  border: none;
+  outline: none;
+}

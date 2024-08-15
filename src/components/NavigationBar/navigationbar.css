@@ -1,0 +1,24 @@
+.navigation_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  height: var(--header-nav-height);
+  padding-right: 60px;
+  padding-left: 60px;
+}
+.app_logo {
+  font-size: 28px;
+  font-weight: 600;
+}
+.navigation_items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.navigation_item_link{
+  font-weight: 400;
+  color: #606060;
+  cursor: pointer;
+}
