@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./homepage.css";
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
@@ -15,6 +15,10 @@ const Homepage = () => {
 
   const GlobalContext = useContext(AppContext)
 
+  useEffect(() => {
+    GlobalContext?.action?.setCurrentPage("home")
+  }, [])
+
   return (
     <div className="homepage_container">
       <div className="homepage_mega_img_container">
@@ -28,7 +32,7 @@ const Homepage = () => {
           <div className="homepage_image_content">
             <div className="image_left_content">
               <h3>FLAGSHIP SALE</h3>
-              <p>Jackpot Days</p>
+              <p className="mb-3">Jackpot Days</p>
               <p>
                 13<sup>th</sup> - 15<sup>th</sup> AUG
               </p>
@@ -37,15 +41,15 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="homepage_product_card">
+      <div className="homepage_product_card my-5">
         {homepagecard.map((el, ind) => {
           return <HomepageCard key={ind} name={el.name} text={el.content} />;
         })}
       </div>
 
-      <h1 className="our_latest_products">Our Latest Products</h1>
+      <h1 className="our_latest_products my-4">Our Latest Products</h1>
 
-      <Grid container spacing={3} className="product_items_container">
+      <Grid container spacing={3} className="product_items_container mt-5">
         {GlobalContext?.state?.product?.productList?.map((el, ind) => {
           return (
             <Grid key={ind} item xs={6} md={4} lg={3}>

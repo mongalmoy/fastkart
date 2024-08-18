@@ -11,11 +11,14 @@ import { AppContext } from "../context/globalcontext";
 const Navigationbar = () => {
   const GlobalContext = useContext(AppContext);
 
+  const currentPage = GlobalContext?.state?.currentPage;
+
   const cartlist = GlobalContext?.state?.cart?.cartList;
 
   const [navbarLink, setNavbarLink] = useState(navbarLinks);
 
   console.log("navbarLink", navbarLink);
+  console.log("currentPage", currentPage);
 
   return (
     <div className="navigation_bar">
@@ -27,18 +30,18 @@ const Navigationbar = () => {
           return (
             <Link
               key={ind}
-              className={`navigation_item_link ${el?.active ? "active" : ""}`}
+              className={`navigation_item_link ${currentPage===el?.pageName ? "active" : ""}`}
               href={el?.link}
-              onClick={() => {
-                setNavbarLink((prev) => {
-                  const newList = prev.map((el, index) =>
-                    ind === index
-                      ? { ...el, active: true }
-                      : { ...el, active: false }
-                  );
-                  return newList;
-                });
-              }}
+              // onClick={() => {
+              //   setNavbarLink((prev) => {
+              //     const newList = prev.map((el, index) =>
+              //       ind === index
+              //         ? { ...el, active: true }
+              //         : { ...el, active: false }
+              //     );
+              //     return newList;
+              //   });
+              // }}
             >
               {el?.name}
             </Link>

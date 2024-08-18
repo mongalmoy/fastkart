@@ -28,14 +28,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5%;
-  color: #fff;
+  padding: 0 3%;
+  color: #000;
 }
 .image_left_content h3 {
   font-size: 22px;
-  margin-bottom: 10px;
-}
-.image_left_content p:first-child {
   margin-bottom: 10px;
 }
 .image_left_content p:last-child {
@@ -55,7 +52,6 @@
 }
 .our_latest_products {
   color: #093C89;
-  margin: 10px 0;
   padding: 0;
   font-size: 28px;
   text-align: center;

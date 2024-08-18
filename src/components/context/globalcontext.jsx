@@ -5,6 +5,7 @@ import { globaldata } from "./globaldata";
 import { message } from "antd";
 import { globalreducer } from "./globalreducer";
 import { products } from "@/data/product/products";
+import { navbarLinks } from "@/data/navigationbar/navigationbarData";
 
 export const AppContext = createContext();
 
@@ -18,7 +19,8 @@ const GlobalContext = ({ children }) => {
     },
     cart: {
       cartList: []
-    }
+    },
+    currentPage: "",
   };
 
   const [state, dispatch] = useReducer(globalreducer, initialState);
@@ -61,6 +63,38 @@ const GlobalContext = ({ children }) => {
     })
   }
 
+  const removeItemToCart = (itemId) => {
+    dispatch({
+      type: "REMOVE_ITEM_TO_CART",
+      payload: {
+        itemId: itemId,
+      }
+    })
+  }
+
+  const updateCartList = (cartList) => {
+    dispatch({
+      type: "UPDATE_CARTLIST",
+      payload: {
+        cartList: cartList,
+      }
+    })
+  }
+
+  const deleteCartItems = (itemIdList) => {
+    dispatch({
+      type: "DELETE_CART_ITEMS",
+      payload: itemIdList
+    })
+  }
+
+  const setCurrentPage = (page) => {
+    dispatch({
+      type: "SET_CURRENT_PAGE",
+      payload: page
+    })
+  }
+
 
   return (
     <AppContext.Provider
@@ -69,6 +103,9 @@ const GlobalContext = ({ children }) => {
         toast: { successMsg, errorMsg, warningMsg },
         action: {
           addItemToCart: addItemToCart,
+          removeItemToCart: removeItemToCart,
+          deleteCartItems: deleteCartItems,
+          setCurrentPage: setCurrentPage,
         }
       }}
     >

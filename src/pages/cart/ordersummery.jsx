@@ -15,7 +15,7 @@ const OrderSummery = () => {
 
   const subTotal = cartlist?.reduce((total, el) => total+=(el.price * el.quantity), 0)
   const gst = subTotal * 0.12;
-  const handlingFees = 50;
+  const handlingFees = subTotal>0 ? 50 : 0;
 
   console.log(subTotal)
   console.log(gst)
@@ -36,7 +36,7 @@ const OrderSummery = () => {
             Order sub-total
           </Typography>
           <Typography variant="body2" fontSize={14}>
-            {"$  "}{subTotal}
+            {"₹  "}{subTotal}
           </Typography>
         </div>
         <hr />
@@ -45,7 +45,7 @@ const OrderSummery = () => {
             Shipping & handling fees
           </Typography>
           <Typography variant="body2" fontSize={14}>
-            {"$  "}{handlingFees}
+            {"₹  "}{handlingFees}
           </Typography>
         </div>
         <hr />
@@ -54,7 +54,7 @@ const OrderSummery = () => {
             GST (12%)
           </Typography>
           <Typography variant="body2" fontSize={14}>
-            {"$  "}
+            {"₹  "}
             {gst}
           </Typography>
         </div>
@@ -64,7 +64,7 @@ const OrderSummery = () => {
             Order sub total
           </Typography>
           <Typography variant="h6" fontSize={14}>
-            {"$  "}{Number(subTotal) + Number(gst) + Number(handlingFees)}
+            {"₹  "}{Number(subTotal) + Number(gst) + Number(handlingFees)}
           </Typography>
         </div>
       </div>

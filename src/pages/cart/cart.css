@@ -22,7 +22,7 @@
   background-color: #fff;
 }
 .order_summery h1 {
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   font-weight: 400;
   font-size: 28px;
   text-align: center;
@@ -33,13 +33,14 @@
 }
 .order_description_container p {
   font-size: 12px;
-  color: #2D2929;
+  color: #2d2929;
   margin-bottom: 16px;
 }
 .order_description_container hr {
   margin: 0;
 }
-.order_desc_item, .order_total {
+.order_desc_item,
+.order_total {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -47,4 +48,16 @@
 }
 .order_desc_item p {
   margin: 0;
+}
+.plus_minus_icon_holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: #c7c7c7;
+  border-radius: 50%;
+}
+.plus_minus_icon_holder:hover {
+  background-color: #555555;
+  color: #fff;
 }
