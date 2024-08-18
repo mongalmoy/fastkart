@@ -24,7 +24,7 @@ const Homepage = () => {
       <div className="homepage_mega_img_container">
         <div className="homepage_image_container">
           <Image
-            src={"/assets/img/homepage/homepage_image.jpg"}
+            src={"./homepage_image.jpg"}
             width={600}
             height={200}
             alt="homepage_image"
