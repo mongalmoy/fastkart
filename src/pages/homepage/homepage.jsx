@@ -7,7 +7,6 @@ import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { Grid } from "@mui/material";
 import ProductItem from "@/components/itemcart/productitem";
-import { products } from "@/data/product/products";
 import { AppContext } from "@/components/context/globalcontext";
 
 
@@ -24,7 +23,7 @@ const Homepage = () => {
       <div className="homepage_mega_img_container">
         <div className="homepage_image_container">
           <Image
-            src={"./homepage_image.jpg"}
+            src={"/assets/img/homepage/homepage_image.jpg"}
             width={600}
             height={200}
             alt="homepage_image"
