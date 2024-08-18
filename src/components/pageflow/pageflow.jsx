@@ -15,7 +15,7 @@ const Pageflow = () => {
     const arr = pathname.split("/")
     arr[0] = "home"
     setPageflowArr(arr);
-  }, [pathname]);
+  }, []);
 
   console.log(pageflowArr);
 
