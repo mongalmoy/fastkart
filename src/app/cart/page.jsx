@@ -15,7 +15,7 @@ export default function Cart() {
 
   useEffect(() => {
     GlobalContext?.action?.setCurrentPage("cart")
-  }, [])
+  }, [GlobalContext?.action])
 
   return (
     <div className="cart">

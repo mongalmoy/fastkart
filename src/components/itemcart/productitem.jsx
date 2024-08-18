@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { FaShoppingCart } from "react-icons/fa";
 import { AppContext } from "../context/globalcontext";
+import Image from "next/image";
 
 const ProductItem = (props) => {
   const GlobalContext = useContext(AppContext);
@@ -21,7 +22,7 @@ const ProductItem = (props) => {
 
   return (
     <Card sx={{ maxWidth: 345 }} className="py-2">
-      <img src={props?.imgUrl} alt={props?.name} className="product_image" />
+      <Image src={props?.imgUrl} alt={props?.name} className="product_image" width={120} height={140} />
       <CardContent className="py-1">
         <Typography gutterBottom variant="h5" component="div" className="m-0">
           {props?.name}

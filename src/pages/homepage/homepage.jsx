@@ -16,7 +16,7 @@ const Homepage = () => {
 
   useEffect(() => {
     GlobalContext?.action?.setCurrentPage("home")
-  }, [])
+  }, [GlobalContext?.action])
 
   return (
     <div className="homepage_container">
