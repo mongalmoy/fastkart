@@ -1,14 +1,22 @@
-import React from "react";
+"use client"
+
+import React, { useContext } from "react";
 import "./homepage.css";
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { Grid } from "@mui/material";
 import ProductItem from "@/components/itemcart/productitem";
+import { products } from "@/data/product/products";
+import { AppContext } from "@/components/context/globalcontext";
+
 
 const Homepage = () => {
+
+  const GlobalContext = useContext(AppContext)
+
   return (
-    <div className="homepage">
+    <div className="homepage_container">
       <div className="homepage_mega_img_container">
         <div className="homepage_image_container">
           <Image
@@ -30,23 +38,31 @@ const Homepage = () => {
       </div>
 
       <div className="homepage_product_card">
-        {homepagecard.map((el,ind) => {
-          return (
-            <HomepageCard
-              key={ind}
-              name={el.name}
-              text={el.content}
-            />
-          )
+        {homepagecard.map((el, ind) => {
+          return <HomepageCard key={ind} name={el.name} text={el.content} />;
         })}
       </div>
 
       <h1 className="our_latest_products">Our Latest Products</h1>
 
-      <Grid spacing={3}>
-        <Grid item xs={2} md={4} lg={4}>
-          <ProductItem />
-        </Grid>
+      <Grid container spacing={3} className="product_items_container">
+        {GlobalContext?.state?.product?.productList?.map((el, ind) => {
+          return (
+            <Grid key={ind} item xs={6} md={4} lg={3}>
+              <ProductItem
+                id={el?.id}
+                imgUrl={el.imageURL}
+                name={el.name}
+                price={el.price}
+                type={el.type}
+                currency={el.currency}
+                color={el.color}
+                gender={el.gender}
+                quantity={el.quantity}
+              />
+            </Grid>
+          );
+        })}
       </Grid>
     </div>
   );

@@ -25,4 +25,8 @@
   font-weight: 400;
   color: #606060;
   cursor: pointer;
+  padding: 2px 10px;
+}
+.navigation_item_link.active {
+  background-color: var(--shade-color-bg);
 }

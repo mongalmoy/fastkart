@@ -1,10 +1,54 @@
-import React from 'react'
-import './productitem.css';
+"use client";
 
-const ProductItem = () => {
+import React, { useContext } from "react";
+import "./productitem.css";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import { FaShoppingCart } from "react-icons/fa";
+import { AppContext } from "../context/globalcontext";
+
+const ProductItem = (props) => {
+  const GlobalContext = useContext(AppContext);
+
+  const action = GlobalContext?.action;
+  const toast = GlobalContext?.toast;
+
   return (
-    <div>ProductItem</div>
-  )
-}
+    <Card sx={{ maxWidth: 345 }} className="py-2">
+      <img src={props?.imgUrl} alt={props?.name} className="product_image" />
+      <CardContent className="py-1">
+        <Typography gutterBottom variant="h5" component="div" className="m-0">
+          {props?.name}
+        </Typography>
+        <Typography gutterBottom variant="h6" component="div">
+          ₹ {props?.price}
+        </Typography>
+      </CardContent>
+      <CardActions style={{ justifyContent: "space-around" }}>
+        <button
+          className="page_button flexbox"
+          onClick={() => {
+            action?.addItemToCart(props?.id);
+            toast?.successMsg("Item added to cart");
+          }}
+        >
+          <FaShoppingCart className="me-1" /> Add to Cart
+        </button>
+        <button
+          className="page_button_outline"
+          style={{ visibility: "hidden" }}
+        >
+          View Details
+        </button>
+      </CardActions>
+    </Card>
+  );
+};
 
-export default ProductItem
+export default ProductItem;

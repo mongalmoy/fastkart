@@ -60,3 +60,6 @@
   font-size: 28px;
   text-align: center;
 }
+.product_items_container {
+  padding: 0 60px;
+}

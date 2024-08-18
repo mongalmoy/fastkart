@@ -20,6 +20,8 @@
   --button-bg: #3D809C;
 
   --homepage-bg: #e8f1ff;
+
+  --shade-color-bg: #e6e6e6;
 }
 
 body {
@@ -48,7 +50,31 @@ body {
   border: none;
   padding: 5px 10px;
 }
+.page_button_outline {
+  color: var(--button-bg);
+  background: #fff;
+  border: 1px solid var(--button-bg);
+  font-size: 13px;
+  border-radius: 6px;
+  outline: none;
+  padding: 5px 10px;
+}
 .page_button svg {
   font-size: 18px;
   font-weight: 700;
+}
+
+.page_body {
+  background-color: var(--homepage-bg);
+  padding: 20px 0;
+  position: absolute;
+  top: calc(var(--header-height) + var(--header-nav-height));
+  left: 0;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height) - var(--header-nav-height));
+}
+.align_right {
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
