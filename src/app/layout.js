@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header/header";
 import Navigationbar from "@/components/NavigationBar/navigationbar";
 import GlobalContext from "@/components/context/globalcontext";
+import Footer from "@/components/footer/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({ children }) {
           <Header />
           <Navigationbar />
           <div className="page_body">{children}</div>
+          {/* <Footer /> */}
         </GlobalContext>
       </body>
+      <Footer />
     </html>
   );
 }

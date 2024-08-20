@@ -32,16 +32,6 @@ const Navigationbar = () => {
               key={ind}
               className={`navigation_item_link ${currentPage===el?.pageName ? "active" : ""}`}
               href={el?.link}
-              // onClick={() => {
-              //   setNavbarLink((prev) => {
-              //     const newList = prev.map((el, index) =>
-              //       ind === index
-              //         ? { ...el, active: true }
-              //         : { ...el, active: false }
-              //     );
-              //     return newList;
-              //   });
-              // }}
             >
               {el?.name}
             </Link>

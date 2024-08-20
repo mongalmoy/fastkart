@@ -8,6 +8,7 @@ import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { Grid } from "@mui/material";
 import ProductItem from "@/components/itemcart/productitem";
 import { AppContext } from "@/components/context/globalcontext";
+import Footer from "@/components/footer/footer";
 
 
 const Homepage = () => {
@@ -67,6 +68,9 @@ const Homepage = () => {
           );
         })}
       </Grid>
+
+      {/* <Footer className={"mt-5"} /> */}
+
     </div>
   );
 };
