@@ -1,18 +1,12 @@
 "use client";
 
-import React, { useContext } from "react";
+import { Suspense, useContext } from "react";
 import "./productitem.css";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { FaShoppingCart } from "react-icons/fa";
 import { AppContext } from "../context/globalcontext";
 import Image from "next/image";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 const ProductItem = (props) => {
   const GlobalContext = useContext(AppContext);
@@ -22,7 +16,17 @@ const ProductItem = (props) => {
 
   return (
     <Card sx={{ maxWidth: 345 }} className="py-2">
-      <Image src={props?.imgUrl} alt={props?.name} className="product_image" width={120} height={140} />
+      <ErrorBoundary>
+        <Suspense fallback={<div>Product Image is loading</div>}>
+          <Image
+            src={props?.imgUrl}
+            alt={props?.name}
+            className="product_image"
+            width={120}
+            height={140}
+          />
+        </Suspense>
+      </ErrorBoundary>
       <CardContent className="py-1">
         <Typography gutterBottom variant="h5" component="div" className="m-0">
           {props?.name}

@@ -1,9 +1,11 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Suspense, lazy } from "react";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Header from "@/components/header/header";
 import Navigationbar from "@/components/NavigationBar/navigationbar";
 import GlobalContext from "@/components/context/globalcontext";
-import Footer from "@/components/footer/footer";
+const LazyFooter = lazy(() => import("@/components/footer/footer"));
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +22,13 @@ export default function RootLayout({ children }) {
           <Header />
           <Navigationbar />
           <div className="page_body">{children}</div>
-          {/* <Footer /> */}
+          <ErrorBoundary>
+            <Suspense fallback={<div>Footer is loading...</div>}>
+              <LazyFooter />
+            </Suspense>
+          </ErrorBoundary>
         </GlobalContext>
       </body>
-      <Footer />
     </html>
   );
 }

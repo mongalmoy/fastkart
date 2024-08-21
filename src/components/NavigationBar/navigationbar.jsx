@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import "./navigationbar.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";

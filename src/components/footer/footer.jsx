@@ -1,4 +1,3 @@
-import React from "react";
 import "./footer.css";
 
 const Footer = () => {
@@ -81,9 +80,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>
-          &copy; {"2022 CMShop - CheomYong's Market Inc. All rights reserved."}
-        </p>
+        &copy; {"2022 CMShop - CheomYong's Market Inc. All rights reserved."}
       </div>
     </footer>
   );

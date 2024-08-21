@@ -1,4 +1,3 @@
-import React from 'react'
 import './homepagecard.css'
 
 const HomepageCard = (props) => {
