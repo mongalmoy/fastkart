@@ -35,7 +35,8 @@ const ProductItem = (props) => {
           ₹ {props?.price}
         </Typography>
       </CardContent>
-      <CardActions style={{ justifyContent: "space-around" }}>
+      <CardActions className="product_item_footer_buttons">
+        <button className="page_button_outline">View Details</button>
         <button
           className="page_button flexbox"
           onClick={() => {
@@ -44,12 +45,6 @@ const ProductItem = (props) => {
           }}
         >
           <FaShoppingCart className="me-1" /> Add to Cart
-        </button>
-        <button
-          className="page_button_outline"
-          style={{ visibility: "hidden" }}
-        >
-          View Details
         </button>
       </CardActions>
     </Card>

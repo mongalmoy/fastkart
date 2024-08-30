@@ -3,3 +3,10 @@
   aspect-ratio: 1;
   padding: 12px;
 }
+.product_item_footer_buttons {
+  justify-content: space-between;
+  padding: 2px 16px;
+}
+.product_item_footer_buttons button {
+  width: 46%;
+}

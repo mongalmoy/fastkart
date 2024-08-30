@@ -7,6 +7,7 @@ import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { Grid } from "@mui/material";
 import { AppContext } from "@/components/context/globalcontext";
+import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 const ProductItem = lazy(() => import("@/components/itemcart/productitem"));
 
@@ -20,6 +21,11 @@ const Homepage = () => {
   return (
     <div className="homepage_container">
       <div className="homepage_mega_img_container">
+        <div className="left_arrow_outer">
+          <div className="arrow_inner">
+        <LuArrowLeft />
+          </div>
+        </div>
         <div className="homepage_image_container">
           <Suspense fallback={<div>Image is loading...</div>}>
             <Image
@@ -39,7 +45,13 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-      </div>
+        
+        <div className="right_arrow_outer">
+          <div className="arrow_inner">
+          <LuArrowRight />
+          </div>
+        </div>
+        </div>
 
       <div className="homepage_product_card my-5">
         {homepagecard.map((el, ind) => {
