@@ -14,10 +14,6 @@ const ProductItem = lazy(() => import("@/components/itemcart/productitem"));
 const Homepage = () => {
   const GlobalContext = useContext(AppContext);
 
-  useEffect(() => {
-    GlobalContext?.action?.setCurrentPage("home");
-  }, []);
-
   return (
     <div className="homepage_container">
       <div className="homepage_mega_img_container">
