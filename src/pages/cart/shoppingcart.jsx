@@ -4,9 +4,7 @@ import {
   alpha,
   Button,
   ButtonGroup,
-  Checkbox,
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -19,15 +17,13 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import LoadingButton from "@mui/lab/LoadingButton";
-import SaveIcon from "@mui/icons-material/Save";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppContext } from "@/components/context/globalcontext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Popconfirm } from "antd";
+// import { Popconfirm } from "antd";
 
 const ShoppingCart = () => {
   const GlobalContext = useContext(AppContext);
@@ -55,7 +51,7 @@ const ShoppingCart = () => {
 
   // const [numSelected, setNumSelected] = useState([1]);
 
-  const totalCartItems = cartlist.reduce(
+  const totalCartItems = cartlist?.reduce(
     (total, el) => (total += Number(el?.quantity)),
     0
   );
@@ -116,20 +112,20 @@ const ShoppingCart = () => {
           ) : null}
 
           {numSelected > 0 ? (
-            <Popconfirm
-              title="Delete item from cart"
-              description="Are you sure to delete these items?"
-              onConfirm={deleteCartItems}
-              onCancel={null}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Tooltip title="Delete">
+            // <Popconfirm
+            //   title="Delete item from cart"
+            //   description="Are you sure to delete these items?"
+            //   onConfirm={deleteCartItems}
+            //   onCancel={null}
+            //   okText="Yes"
+            //   cancelText="No"
+            // >
+              <Tooltip title="Delete" onClick={deleteCartItems}>
                 <IconButton>
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
-            </Popconfirm>
+            // </Popconfirm>
           ) : null}
         </Toolbar>
       ) : null}
@@ -237,7 +233,7 @@ const ShoppingCart = () => {
               <TableCell align="left">
                 <Typography color={"#000"} fontSize={17} variant="subtitle2">
                   {"₹  "}
-                  {cartlist.reduce(
+                  {cartlist?.reduce(
                     (total, el) =>
                       (total += Number(el?.price) * Number(el?.quantity)),
                     0

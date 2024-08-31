@@ -18,6 +18,7 @@
   --header-nav-height: 80px;
 
   --button-bg: #3D809C;
+  --button-bg-hover: #2b6882;
 
   --homepage-bg: #e8f1ff;
 
@@ -50,6 +51,9 @@ body {
   border: none;
   padding: 5px 10px;
 }
+.page_button:hover {
+  background-color: var(--button-bg-hover);
+}
 .page_button_outline {
   color: var(--button-bg);
   background: #fff;
@@ -67,11 +71,12 @@ body {
 .page_body {
   background-color: var(--homepage-bg);
   padding: 20px 0;
-  position: absolute;
-  top: calc(var(--header-height) + var(--header-nav-height));
+  position: relative;
+  /* top: calc(var(--header-height) + var(--header-nav-height)); */
   left: 0;
-  width: 100%;
+  width: 100vw;
   min-height: calc(100vh - var(--header-height) - var(--header-nav-height));
+  padding-bottom: 48px;
 }
 .align_right {
   display: flex;

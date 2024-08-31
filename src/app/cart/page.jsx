@@ -13,10 +13,6 @@ export default function Cart() {
 
   const cartlist = GlobalContext?.state?.cart?.cartList;
 
-  useEffect(() => {
-    GlobalContext?.action?.setCurrentPage("cart")
-  }, [])
-
   return (
     <div className="cart">
       {cartlist?.length === 0 ? (

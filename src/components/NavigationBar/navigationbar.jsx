@@ -1,24 +1,20 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import "./navigationbar.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import { navbarLinks } from "@/data/navigationbar/navigationbarData";
 import { AppContext } from "../context/globalcontext";
+import { usePathname } from "next/navigation";
 
 const Navigationbar = () => {
+  const pathname = usePathname();
+
   const GlobalContext = useContext(AppContext);
 
-  const currentPage = GlobalContext?.state?.currentPage;
-
   const cartlist = GlobalContext?.state?.cart?.cartList;
-
-  const [navbarLink, setNavbarLink] = useState(navbarLinks);
-
-  console.log("navbarLink", navbarLink);
-  console.log("currentPage", currentPage);
 
   return (
     <div className="navigation_bar">
@@ -26,22 +22,14 @@ const Navigationbar = () => {
         <span className="fast_color">Fast</span>Kart
       </div>
       <div className="navigation_items">
-        {navbarLink.map((el, ind) => {
+        {navbarLinks.map((el, ind) => {
           return (
             <Link
               key={ind}
-              className={`navigation_item_link ${currentPage===el?.pageName ? "active" : ""}`}
+              className={`navigation_item_link ${
+                pathname === el?.link ? "active" : ""
+              }`}
               href={el?.link}
-              // onClick={() => {
-              //   setNavbarLink((prev) => {
-              //     const newList = prev.map((el, index) =>
-              //       ind === index
-              //         ? { ...el, active: true }
-              //         : { ...el, active: false }
-              //     );
-              //     return newList;
-              //   });
-              // }}
             >
               {el?.name}
             </Link>

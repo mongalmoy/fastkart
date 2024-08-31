@@ -1,11 +1,9 @@
 "use client";
 
 import { createContext, useReducer } from "react";
-import { globaldata } from "./globaldata";
 import { message } from "antd";
 import { globalreducer } from "./globalreducer";
 import { products } from "@/data/product/products";
-import { navbarLinks } from "@/data/navigationbar/navigationbarData";
 
 export const AppContext = createContext();
 

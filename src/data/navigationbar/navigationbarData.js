@@ -2,13 +2,16 @@ export const navbarLinks = [
   {
     name: "Home",
     link: "/",
-    // active: true,
     pageName: "home",
+  },
+  {
+    name: "Shop",
+    link: "/shop",
+    pageName: "shop"
   },
   {
     name: "Shopping Cart",
     link: "/cart",
-    // active: false,
     pageName: "cart"
   },
 ];

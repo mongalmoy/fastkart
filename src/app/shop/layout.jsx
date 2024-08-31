@@ -1,5 +1,10 @@
+import Pageflow from "@/components/pageflow/pageflow";
+
 export default function RootLayout({ children }) {
   return (
-    <>{children}</>
+    <div>
+      <Pageflow />
+      {children}
+    </div>
   );
 }

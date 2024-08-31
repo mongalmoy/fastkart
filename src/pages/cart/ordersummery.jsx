@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext } from "react";
+import { useContext } from "react";
 import "./cart.css";
 import { Typography } from "@mui/material";
 import { AppContext } from "@/components/context/globalcontext";
