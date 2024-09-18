@@ -1,20 +1,17 @@
 "use client";
 
-import { useContext, useState } from "react";
 import "./navigationbar.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import { navbarLinks } from "@/data/navigationbar/navigationbarData";
-import { AppContext } from "../context/globalcontext";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Navigationbar = () => {
   const pathname = usePathname();
 
-  const GlobalContext = useContext(AppContext);
-
-  const cartlist = GlobalContext?.state?.cart?.cartList;
+  const cartlist = useSelector(state => state?.cart?.cartList);
 
   return (
     <div className="navigation_bar">

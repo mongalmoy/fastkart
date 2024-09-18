@@ -80,7 +80,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        &copy; {"2022 CMShop - CheomYong's Market Inc. All rights reserved."}
+        &copy; {"Fastkart Inc - 2024. All rights reserved."}
       </div>
     </footer>
   );

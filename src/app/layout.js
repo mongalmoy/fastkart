@@ -4,7 +4,8 @@ import { Suspense, lazy } from "react";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Header from "@/components/header/header";
 import Navigationbar from "@/components/NavigationBar/navigationbar";
-import GlobalContext from "@/components/context/globalcontext";
+import WrapperContext from "@/components/context/WrapperContext";
+
 const LazyFooter = lazy(() => import("@/components/footer/footer"));
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GlobalContext>
+        <WrapperContext>
           <Header />
           <Navigationbar />
           <div className="page_body">{children}</div>
@@ -27,7 +28,7 @@ export default function RootLayout({ children }) {
               <LazyFooter />
             </Suspense>
           </ErrorBoundary>
-        </GlobalContext>
+        </WrapperContext>
       </body>
     </html>
   );
