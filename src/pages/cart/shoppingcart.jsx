@@ -17,63 +17,79 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppContext } from "@/components/context/WrapperContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, removeItemToCart } from "@/react-redux/slices/carts/cartSlice";
+import {
+  addItemToCart,
+  removeItemToCart,
+} from "@/react-redux/slices/carts/cartSlice";
+import { useRouter } from "next/navigation";
 // import { Popconfirm } from "antd";
 
 const ShoppingCart = () => {
   const GlobalContext = useContext(AppContext);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  // const cartList = GlobalContext?.state?.cart?.cartList?.map(el => ({...el, isChecked: false}));
   const action = GlobalContext?.action;
   const toast = GlobalContext?.toast;
 
-  const cartList = useSelector(state => state?.cart?.cartList);
+  const cartList = useSelector((state) => state?.cart?.cartList);
 
-  console.log("cartList", cartList);
+  // /********************** useState starts***************************/
+  const [showDelBtn, setShowDelBtn] = useState(false);
+  // /********************** useState ends ***************************/
 
-  const subTotal = cartList?.reduce(
-    (total, el) => (total += el.price * el.quantity),
-    0
+  /********************** useRef starts***************************/
+  const cartListRef = useRef(
+    cartList?.map((el) => ({ id: el?.id, isChecked: false }))
   );
-  const gst = subTotal * 0.12;
-  const handlingFees = 50;
+  /********************** useRef ends ***************************/
 
-  // const [numSelected, setNumSelected] = useState([1]);
+  console.log(cartListRef.current);
 
   const totalCartItems = cartList?.reduce(
     (total, el) => (total += Number(el?.quantity)),
     0
   );
 
-  const numSelected = cartList?.reduce(
-    (total, el) => (total += el?.isChecked ? 1 : 0),
-    0
-  );
-
-  console.log("numSelected", numSelected);
-
-  const selectItem = (itemid) => {
-    setCartlist((prev) => {
-      const newList = prev?.map((el) =>
-        el?.id === itemid ? { ...el, isChecked: !el?.isChecked } : el
-      );
-      return newList;
-    });
-  };
-
   const deleteCartItems = () => {
-    const itemIdList = cartList?.filter(el => el?.isChecked==true)?.map(el => el?.id)
-    action?.deleteCartItems(itemIdList)
+    const itemIdList = cartList
+      ?.filter((el) => el?.isChecked == true)
+      ?.map((el) => el?.id);
+    action?.deleteCartItems(itemIdList);
+
+    const delArr = cartListRef.current?.map((el) => el?.id);
+
+    const itemsToDelete = cartList
+      ?.filter((el) => delArr?.includes(el?.id))
+      ?.map((el) => ({ id: el?.id, count: el?.quantity }));
+
+    console.log("itemsToDelete", itemsToDelete)
+
+    dispatch(removeItemToCart(itemsToDelete));
+    cartListRef.current = cartListRef.current?.filter(el => !el?.isChecked)
+    toast?.success("Items lists deleted from your cart");
   };
+
+  const handleChangeInput = (itemId) => {
+    cartListRef.current?.forEach((el) =>
+      el?.id === itemId ? (el.isChecked = !el?.isChecked) : null
+    );
+    setShowDelBtn(
+      cartListRef.current?.reduce(
+        (tot, el) => (tot += el?.isChecked ? 1 : 0),
+        0
+      ) > 0
+    );
+  };
+  console.log("cartListRef", cartListRef);
 
   return (
     <div className="shopping_cart_container">
@@ -83,12 +99,12 @@ const ShoppingCart = () => {
         {totalCartItems > 1 ? "(s)" : null} in your cart
       </p>
 
-      {numSelected ? (
+      {showDelBtn ? (
         <Toolbar
           sx={{
             pl: { sm: 2 },
             pr: { xs: 1, sm: 1 },
-            ...(numSelected > 0 && {
+            ...(showDelBtn > 0 && {
               bgcolor: (theme) =>
                 alpha(
                   theme.palette.primary.main,
@@ -98,32 +114,23 @@ const ShoppingCart = () => {
           }}
           className="mt-4"
         >
-          {numSelected > 0 ? (
+          {showDelBtn ? (
             <Typography
               sx={{ flex: "1 1 100%" }}
               color="inherit"
               variant="subtitle1"
               component="div"
             >
-              {numSelected} selected
+              {showDelBtn} selected
             </Typography>
           ) : null}
 
-          {numSelected > 0 ? (
-            // <Popconfirm
-            //   title="Delete item from cart"
-            //   description="Are you sure to delete these items?"
-            //   onConfirm={deleteCartItems}
-            //   onCancel={null}
-            //   okText="Yes"
-            //   cancelText="No"
-            // >
-              <Tooltip title="Delete" onClick={deleteCartItems}>
-                <IconButton>
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            // </Popconfirm>
+          {showDelBtn ? (
+            <Tooltip title="Delete" onClick={deleteCartItems}>
+              <IconButton>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
           ) : null}
         </Toolbar>
       ) : null}
@@ -169,8 +176,9 @@ const ShoppingCart = () => {
                         width: "16px",
                         height: "16px",
                       }}
-                      checked={el?.isChecked === true ? true : false}
-                      onClick={() => selectItem(el?.id)}
+                      checked={el?.isChecked}
+                      // onClick={() => selectItem(el?.id)}
+                      onChange={() => handleChangeInput(el?.id)}
                     />
                   </TableCell>
                   <TableCell align="left">
@@ -187,7 +195,9 @@ const ShoppingCart = () => {
                       <a
                         className="plus_minus_icon_holder"
                         onClick={() => {
-                          dispatch(removeItemToCart(el));
+                          dispatch(
+                            removeItemToCart([{ id: el?.id, count: 1 }])
+                          );
                           toast?.success("One item reduced to cart");
                         }}
                       >
@@ -197,8 +207,14 @@ const ShoppingCart = () => {
                       <a
                         className="plus_minus_icon_holder"
                         onClick={() => {
-                          dispatch(addItemToCart(el));
+                          dispatch(
+                            addItemToCart({
+                              item: el,
+                              itemCnt: 1,
+                            })
+                          );
                           toast?.success("One more item added to cart");
+                          router.push("/cart");
                         }}
                       >
                         <AddIcon fontSize="10" />
@@ -224,10 +240,9 @@ const ShoppingCart = () => {
                   Total
                 </Typography>
               </TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
+              {Array.from({ length: 4 }).map((el) => (
+                <TableCell key={el?.toString()}></TableCell>
+              ))}
               <TableCell align="left">
                 <Typography color={"#000"} fontSize={17} variant="subtitle2">
                   {"₹  "}

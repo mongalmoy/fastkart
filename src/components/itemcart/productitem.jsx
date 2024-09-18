@@ -53,8 +53,12 @@ const ProductItem = (props) => {
         <button
           className="page_button flexbox"
           onClick={() => {
-            dispatch(addItemToCart(props?.item));
+            dispatch(addItemToCart({
+              item: props?.item, 
+              itemCnt: 1
+            }));
             toast?.success("Item added to cart");
+            router.push("/cart");
           }}
         >
           <FaShoppingCart className="me-1" /> Add to Cart

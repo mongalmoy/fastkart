@@ -1,15 +1,40 @@
 "use client";
 
 import "./shop.css";
+import { addItemToCart } from "@/react-redux/slices/carts/cartSlice";
 import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
 import { ImPower } from "react-icons/im";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useContext, useState } from "react";
+import { AppContext } from "@/components/context/WrapperContext";
+import { useRouter } from "next/navigation";
 
 export default function Shop() {
+  const GlobalContext = useContext(AppContext);
+  const toast = GlobalContext?.toast;
+
   const viewPageItem = useSelector((state) => state?.viewpage?.itemDetails);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   console.log(viewPageItem);
+
+  /************* useStates starts *************/
+  const [productDetails, setProductDetails] = useState({
+    quantity: 0,
+    size: "M", // S -> Small, M -> Medium, L -> Large, XL -> Extra Large
+  });
+  /************* useStates ends ***************/
+
+  console.log(productDetails);
+
+  const handleChange = (e) => {
+    setProductDetails((prev) => {
+      prev[e.target.name] = e.target.value;
+      return { ...prev };
+    });
+  };
 
   return (
     <div className="shop">
@@ -30,7 +55,19 @@ export default function Shop() {
                 <ImPower className="me-2" />
                 Buy Now
               </button>
-              <button className="page_button flexbox">
+              <button
+                className="page_button flexbox"
+                onClick={() => {
+                  dispatch(
+                    addItemToCart({
+                      item: viewPageItem,
+                      itemCnt: 1,
+                    })
+                  );
+                  toast?.success("Item added to cart");
+                  router.push("/cart");
+                }}
+              >
                 <FaShoppingCart className="me-2" />
                 Add to Cart
               </button>
@@ -49,19 +86,51 @@ export default function Shop() {
                 <label htmlFor="quantity" className="mb-2">
                   Products Quantity
                 </label>
-                <input type="number" className="mb-2" id="quantity" min="1" />
+                <input
+                  type="number"
+                  className="mb-2"
+                  id="quantity"
+                  name="quantity"
+                  min={1}
+                  max={5}
+                  value={productDetails.quantity}
+                  onChange={handleChange}
+                />
 
                 <label htmlFor="size">Products Size</label>
-                <select id="size">
-                  <option value="Small">Small</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Large">Large</option>
+                <select
+                  name="size"
+                  id="size"
+                  value={productDetails.size}
+                  onChange={handleChange}
+                >
+                  <option value="S">Small</option>
+                  <option value="M">Medium</option>
+                  <option value="L">Large</option>
                   <option value="XL">XL</option>
                 </select>
               </div>
               <div className="product-price">
-                <p>₱0.00</p>
-                <button className="page_button" onClick={null}>
+                <p>
+                  ₹{" "}
+                  {(
+                    Number(viewPageItem?.price) *
+                    Number(productDetails.quantity)
+                  )?.toFixed(2)}
+                </p>
+                <button
+                  className="page_button"
+                  onClick={() => {
+                    dispatch(
+                      addItemToCart({
+                        item: viewPageItem,
+                        itemCnt: Number(productDetails.quantity),
+                      })
+                    );
+                    toast?.success("Item added to cart");
+                    router.push("/cart");
+                  }}
+                >
                   Add to Cart
                 </button>
               </div>

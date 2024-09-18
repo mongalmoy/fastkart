@@ -11,33 +11,42 @@ export const cartSlice = createSlice({
       return state.cartList;
     },
     addItemToCart: (state, action) => {
-      const item = action.payload;
+      const item = action.payload?.item;
+      const itemCnt = action.payload?.itemCnt;
+
       const cartlist = state?.cartList;
 
       const foundEl = cartlist?.find((el) => el?.id == item?.id);
       if (foundEl) {
         const newList = cartlist?.map((el) =>
-          el?.id === item?.id ? { ...el, quantity: el.quantity + 1 } : el
+          el?.id === item?.id ? { ...el, quantity: el.quantity + itemCnt } : el
         );
         state.cartList = newList;
       } else {
-        state.cartList = [...state?.cartList, { ...item, quantity: 1 }];
+        state.cartList = [...state?.cartList, { ...item, quantity: itemCnt }];
       }
     },
     removeItemToCart: (state, action) => {
-      const item = action.payload;
+      const items = action.payload;
       const cartlist = state?.cartList;
+      let newList = cartlist;
 
-      const foundEl = cartlist?.find((el) => el?.id == item?.id);
-      if (foundEl.quantity > 1) {
-        const newList = cartlist?.map((el) =>
-          el?.id === item?.id ? { ...el, quantity: el.quantity - 1 } : el
-        );
-        state.cartList = newList;
-      } else if (foundEl.quantity == 1) {
-        const newList = cartlist?.filter((el) => el?.id !== item?.id);
-        state.cartList = newList;
-      }
+      items.forEach(element => {
+        const foundEl = cartlist?.find((el) => el?.id == element?.id);
+        const foundInd = cartlist?.findIndex(el => el?.id == element?.id)
+
+        if(foundInd>=0) {
+          if(Number(foundEl?.quantity)-Number(element?.count)>1) {
+            newList[foundInd].quantity -= element?.count;
+          } else {
+            newList = newList.filter((_,ind) => ind!==foundInd)
+          }
+        }
+      });
+
+      state.cartList = newList;
+
+      
     },
   },
 });
