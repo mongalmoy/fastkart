@@ -1,25 +1,23 @@
 "use client";
 
-import { AppContext } from "@/components/context/globalcontext";
+import { AppContext } from "@/components/context/WrapperContext";
 import "@/pages/cart/cart.css";
 import OrderSummery from "@/pages/cart/ordersummery";
 import ShoppingCart from "@/pages/cart/shoppingcart";
 import { Grid } from "@mui/material";
 import { Alert } from "antd";
 import { useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart() {
-  const GlobalContext = useContext(AppContext);
 
-  const cartlist = GlobalContext?.state?.cart?.cartList;
+  const cartList = useSelector(state => state?.cart?.cartList);
 
-  useEffect(() => {
-    GlobalContext?.action?.setCurrentPage("cart")
-  }, [])
+  console.log(cartList)
 
   return (
     <div className="cart">
-      {cartlist?.length === 0 ? (
+      {cartList?.length === 0 ? (
         <Alert
           message="Cart is Empty"
           description="To continue with your purchase, please ensure that you've added at least one item to your cart."

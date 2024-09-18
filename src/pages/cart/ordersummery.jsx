@@ -1,25 +1,15 @@
 "use client"
-import { useContext } from "react";
+
 import "./cart.css";
 import { Typography } from "@mui/material";
-import { AppContext } from "@/components/context/globalcontext";
+import { useSelector } from "react-redux";
 
 const OrderSummery = () => {
-  const GlobalContext = useContext(AppContext);
+  const cartList = useSelector(state => state?.cart?.cartList);
 
-  console.log(GlobalContext);
-
-  const cartlist = GlobalContext?.state?.cart?.cartList;
-
-  console.log("cartlist", cartlist);
-
-  const subTotal = cartlist?.reduce((total, el) => total+=(el.price * el.quantity), 0)
+  const subTotal = cartList?.reduce((total, el) => total+=(el.price * el.quantity), 0)
   const gst = subTotal * 0.12;
   const handlingFees = subTotal>0 ? 50 : 0;
-
-  console.log(subTotal)
-  console.log(gst)
-  console.log(handlingFees)
 
   return (
     <div className="order_summery">

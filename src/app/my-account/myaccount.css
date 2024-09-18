@@ -1,0 +1,8 @@
+.my_account_layout {
+  margin: 24px 60px;
+  display: flex;
+  gap: 24px;
+}
+.my_account_right {
+  width: 100%;
+}

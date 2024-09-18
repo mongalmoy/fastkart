@@ -1,24 +1,17 @@
 "use client";
 
-import { useContext, useState } from "react";
 import "./navigationbar.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import { navbarLinks } from "@/data/navigationbar/navigationbarData";
-import { AppContext } from "../context/globalcontext";
+import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Navigationbar = () => {
-  const GlobalContext = useContext(AppContext);
+  const pathname = usePathname();
 
-  const currentPage = GlobalContext?.state?.currentPage;
-
-  const cartlist = GlobalContext?.state?.cart?.cartList;
-
-  const [navbarLink, setNavbarLink] = useState(navbarLinks);
-
-  console.log("navbarLink", navbarLink);
-  console.log("currentPage", currentPage);
+  const cartlist = useSelector(state => state?.cart?.cartList);
 
   return (
     <div className="navigation_bar">
@@ -26,11 +19,13 @@ const Navigationbar = () => {
         <span className="fast_color">Fast</span>Kart
       </div>
       <div className="navigation_items">
-        {navbarLink.map((el, ind) => {
+        {navbarLinks.map((el, ind) => {
           return (
             <Link
               key={ind}
-              className={`navigation_item_link ${currentPage===el?.pageName ? "active" : ""}`}
+              className={`navigation_item_link ${
+                pathname === el?.link ? "active" : ""
+              }`}
               href={el?.link}
             >
               {el?.name}

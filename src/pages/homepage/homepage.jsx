@@ -1,22 +1,18 @@
 "use client";
 
-import { lazy, Suspense, useContext, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import "./homepage.css";
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { Grid } from "@mui/material";
-import { AppContext } from "@/components/context/globalcontext";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
+import { useSelector } from "react-redux";
 
 const ProductItem = lazy(() => import("@/components/itemcart/productitem"));
 
 const Homepage = () => {
-  const GlobalContext = useContext(AppContext);
-
-  useEffect(() => {
-    GlobalContext?.action?.setCurrentPage("home");
-  }, []);
+  const products = useSelector(state => state?.product?.productList);
 
   return (
     <div className="homepage_container">
@@ -62,11 +58,12 @@ const Homepage = () => {
       <h1 className="our_latest_products my-4">Our Latest Products</h1>
 
       <Grid container spacing={3} className="product_items_container mt-5">
-        {GlobalContext?.state?.product?.productList?.map((el, ind) => {
+        {products?.map((el, ind) => {
           return (
             <Grid key={ind} item xs={6} md={4} lg={3}>
               <Suspense fallback={<div>Product Item is loading...</div>}>
                 <ProductItem
+                  item={el}
                   id={el?.id}
                   imgUrl={el.imageURL}
                   name={el.name}

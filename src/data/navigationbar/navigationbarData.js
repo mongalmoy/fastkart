@@ -4,11 +4,11 @@ export const navbarLinks = [
     link: "/",
     pageName: "home",
   },
-  {
-    name: "Shop",
-    link: "/shop",
-    pageName: "shop"
-  },
+  // {
+  //   name: "Shop",
+  //   link: "/shop",
+  //   pageName: "shop"
+  // },
   {
     name: "Shopping Cart",
     link: "/cart",

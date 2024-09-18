@@ -20,29 +20,27 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AppContext } from "@/components/context/globalcontext";
+import { AppContext } from "@/components/context/WrapperContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart, removeItemToCart } from "@/react-redux/slices/carts/cartSlice";
 // import { Popconfirm } from "antd";
 
 const ShoppingCart = () => {
   const GlobalContext = useContext(AppContext);
 
-  // const cartlist = GlobalContext?.state?.cart?.cartList?.map(el => ({...el, isChecked: false}));
+  const dispatch = useDispatch();
+
+  // const cartList = GlobalContext?.state?.cart?.cartList?.map(el => ({...el, isChecked: false}));
   const action = GlobalContext?.action;
   const toast = GlobalContext?.toast;
 
-  const [cartlist, setCartlist] = useState(
-    GlobalContext?.state?.cart?.cartList
-  );
+  const cartList = useSelector(state => state?.cart?.cartList);
 
-  useEffect(() => {
-    setCartlist(GlobalContext?.state?.cart?.cartList);
-  }, [GlobalContext?.state?.cart?.cartList]);
+  console.log("cartList", cartList);
 
-  console.log("cartlist", cartlist);
-
-  const subTotal = cartlist?.reduce(
+  const subTotal = cartList?.reduce(
     (total, el) => (total += el.price * el.quantity),
     0
   );
@@ -51,12 +49,12 @@ const ShoppingCart = () => {
 
   // const [numSelected, setNumSelected] = useState([1]);
 
-  const totalCartItems = cartlist?.reduce(
+  const totalCartItems = cartList?.reduce(
     (total, el) => (total += Number(el?.quantity)),
     0
   );
 
-  const numSelected = cartlist?.reduce(
+  const numSelected = cartList?.reduce(
     (total, el) => (total += el?.isChecked ? 1 : 0),
     0
   );
@@ -73,7 +71,7 @@ const ShoppingCart = () => {
   };
 
   const deleteCartItems = () => {
-    const itemIdList = cartlist?.filter(el => el?.isChecked==true)?.map(el => el?.id)
+    const itemIdList = cartList?.filter(el => el?.isChecked==true)?.map(el => el?.id)
     action?.deleteCartItems(itemIdList)
   };
 
@@ -155,7 +153,7 @@ const ShoppingCart = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cartlist?.map((el, index) => {
+            {cartList?.map((el, index) => {
               return (
                 <TableRow
                   key={index}
@@ -189,8 +187,8 @@ const ShoppingCart = () => {
                       <a
                         className="plus_minus_icon_holder"
                         onClick={() => {
-                          action?.removeItemToCart(el?.id);
-                          toast?.successMsg("One item reduced to cart");
+                          dispatch(removeItemToCart(el));
+                          toast?.success("One item reduced to cart");
                         }}
                       >
                         <RemoveIcon fontSize="10" />
@@ -199,8 +197,8 @@ const ShoppingCart = () => {
                       <a
                         className="plus_minus_icon_holder"
                         onClick={() => {
-                          action?.addItemToCart(el?.id);
-                          toast?.successMsg("One more item added to cart");
+                          dispatch(addItemToCart(el));
+                          toast?.success("One more item added to cart");
                         }}
                       >
                         <AddIcon fontSize="10" />
@@ -233,7 +231,7 @@ const ShoppingCart = () => {
               <TableCell align="left">
                 <Typography color={"#000"} fontSize={17} variant="subtitle2">
                   {"₹  "}
-                  {cartlist?.reduce(
+                  {cartList?.reduce(
                     (total, el) =>
                       (total += Number(el?.price) * Number(el?.quantity)),
                     0
