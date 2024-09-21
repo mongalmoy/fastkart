@@ -1,5 +1,5 @@
+import "@/styles/pages/user/userprofilecard/UserProfileCard.css";
 import Image from "next/image";
-import "./UserProfileCard.css";
 import Link from "next/link";
 import { Suspense } from "react";
 
