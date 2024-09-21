@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppContext } from "@/components/context/WrapperContext";
@@ -163,7 +163,7 @@ const ShoppingCart = () => {
             {cartList?.map((el, index) => {
               return (
                 <TableRow
-                  key={index}
+                  key={el?.toString() + index}
                   hover
                   tabIndex={-1}
                   sx={{ cursor: "pointer" }}

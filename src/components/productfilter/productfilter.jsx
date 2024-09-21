@@ -1,4 +1,4 @@
-import "./productfilter.css";
+import "@/styles/component/productfilter/productfilter.css";
 
 const ProductFilter = () => {
   return (

@@ -1,30 +1,43 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import "./pageflow.css";
-import { usePathname } from "next/navigation";
+import "@/styles/component/pageflow/pageflow.css";
+import { usePathname, useRouter } from "next/navigation";
 import { Breadcrumbs, Link } from "@mui/material";
-// import { useRouter } from 'next/router';
 
 const Pageflow = () => {
-  // const router = useRouter();
-  const [pageflowArr, setPageflowArr] = useState([]);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const [pageflowArr, setPageflowArr] = useState([]);
 
   useEffect(() => {
-    const arr = pathname.split("/")
-    arr[0] = "home"
+    const arr = pathname.split("/");
+    arr[0] = "home";
     setPageflowArr(arr);
   }, []);
 
-  console.log(pageflowArr);
+  const handleClickOnLink = (ind) => {
+    if (ind == 0) router.push("/");
+    else {
+      const path = pageflowArr
+        .splice(1, ind)
+        ?.reduce((path, el) => (path += "/" + el), "");
+      router.push(path);
+    }
+  };
 
   return (
     <div className="pageflow_container">
       <div className="pageflow_content">
         <Breadcrumbs separator="›" aria-label="breadcrumb">
           {pageflowArr.map((el, ind) => (
-            <Link key={ind} href="#" underline="hover">
+            <Link
+              key={ind}
+              className="cursor-pointer"
+              underline="hover"
+              onClick={() => handleClickOnLink(ind)}
+            >
               {el}
             </Link>
           ))}

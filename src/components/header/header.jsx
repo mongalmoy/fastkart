@@ -1,14 +1,29 @@
-import './header.css';
+"use client";
+
+import "@/styles/component/header/header.css";
+import { useRouter } from "next/navigation";
+import { headerLinks } from "@/data/header";
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <div className="header">
-      <button className="welcome flexbox">Welcome</button>
+      <button className="welcome flexbox" onClick={() => router.push("/")}>
+        Welcome
+      </button>
       <div className="header_links">
-        <button className="header_item">Register</button>
-        <button className="header_item">Go to Cart</button>
-        <button className="header_item">My Account</button>
-        <button className="header_item">Login</button>
+        {headerLinks.map((el, ind) => (
+          <button
+            key={el?.toString() + ind}
+            className="header_item"
+            onClick={() => {
+              router.push("/" + el.link);
+            }}
+          >
+            {el.name}
+          </button>
+        ))}
       </div>
     </div>
   );

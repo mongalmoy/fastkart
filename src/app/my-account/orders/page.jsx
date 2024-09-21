@@ -1,4 +1,4 @@
-import "./style.css";
+import "@/styles/app/my-account/orders/style.css";
 
 const MyOrders = () => {
   return (

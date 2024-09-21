@@ -1,21 +1,22 @@
 "use client";
 
-import "./navigationbar.css";
+import "@/styles/component/navigationbar/navigationbar.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import { navbarLinks } from "@/data/navigationbar/navigationbarData";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
 const Navigationbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
 
-  const cartlist = useSelector(state => state?.cart?.cartList);
+  const cartlist = useSelector((state) => state?.cart?.cartList);
 
   return (
     <div className="navigation_bar">
-      <div className="app_logo">
+      <div className="app_logo" onClick={() => router.push("/")}>
         <span className="fast_color">Fast</span>Kart
       </div>
       <div className="navigation_items">

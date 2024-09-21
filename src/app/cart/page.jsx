@@ -1,13 +1,11 @@
 "use client";
 
-import { AppContext } from "@/components/context/WrapperContext";
-import "@/pages/cart/cart.css";
+import "@/styles/app/cart/cart.css";
 import OrderSummery from "@/pages/cart/ordersummery";
 import ShoppingCart from "@/pages/cart/shoppingcart";
 import { Grid } from "@mui/material";
 import { Alert } from "antd";
-import { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Cart() {
 

@@ -1,4 +1,4 @@
-import "./style.css";
+import "@/styles/app/my-account/change-password/style.css";
 
 const ChangePassword = () => {
   return (

@@ -1,6 +1,5 @@
 "use client";
 
-import { lazy, Suspense } from "react";
 import "./homepage.css";
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
@@ -8,29 +7,35 @@ import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { Grid } from "@mui/material";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 
-const ProductItem = lazy(() => import("@/components/itemcart/productitem"));
+const LazyProductItem = dynamic(
+  () => import("@/components/itemcart/productitem"),
+  {
+    loading: () => <div>Product Item is loading...</div>,
+  }
+);
 
 const Homepage = () => {
-  const products = useSelector(state => state?.product?.productList);
+  const products = useSelector((state) => state?.product?.productList);
 
   return (
     <div className="homepage_container">
       <div className="homepage_mega_img_container">
         <div className="left_arrow_outer">
           <div className="arrow_inner">
-        <LuArrowLeft />
+            <LuArrowLeft />
           </div>
         </div>
         <div className="homepage_image_container">
-          <Suspense fallback={<div>Image is loading...</div>}>
-            <Image
-              src={"/assets/img/homepage/homepage_image.jpg"}
-              width={600}
-              height={200}
-              alt="homepage_image"
-            />
-          </Suspense>
+          <Image
+            src={"/assets/img/homepage/homepage_image.jpg"}
+            width={600}
+            height={200}
+            alt="homepage_image"
+            loading="lazy"
+            // loader={"Homepage image loading..."}
+          />
           <div className="homepage_image_content">
             <div className="image_left_content">
               <h3>FLAGSHIP SALE</h3>
@@ -41,13 +46,13 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="right_arrow_outer">
           <div className="arrow_inner">
-          <LuArrowRight />
+            <LuArrowRight />
           </div>
         </div>
-        </div>
+      </div>
 
       <div className="homepage_product_card my-5">
         {homepagecard.map((el, ind) => {
@@ -61,20 +66,18 @@ const Homepage = () => {
         {products?.map((el, ind) => {
           return (
             <Grid key={ind} item xs={6} md={4} lg={3}>
-              <Suspense fallback={<div>Product Item is loading...</div>}>
-                <ProductItem
-                  item={el}
-                  id={el?.id}
-                  imgUrl={el.imageURL}
-                  name={el.name}
-                  price={el.price}
-                  type={el.type}
-                  currency={el.currency}
-                  color={el.color}
-                  gender={el.gender}
-                  quantity={el.quantity}
-                />
-              </Suspense>
+              <LazyProductItem
+                item={el}
+                id={el?.id}
+                imgUrl={el.imageURL}
+                name={el.name}
+                price={el.price}
+                type={el.type}
+                currency={el.currency}
+                color={el.color}
+                gender={el.gender}
+                quantity={el.quantity}
+              />
             </Grid>
           );
         })}

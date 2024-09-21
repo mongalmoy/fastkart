@@ -1,4 +1,4 @@
-import './homepagecard.css'
+import '@/styles/component/homepagecard/homepagecard.css'
 
 const HomepageCard = (props) => {
   return (

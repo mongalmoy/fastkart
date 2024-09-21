@@ -1,10 +1,10 @@
-import "./myaccount.css";
+import "@/styles/app/my-account/myaccount.css";
 import Pageflow from "@/components/pageflow/pageflow";
-import UserProfileCard from "@/components/user/userprofilecard/UserProfileCard";
+import UserProfileCard from "@/pages/user/userprofilecard/UserProfileCard";
 
 export default function RootLayout({ children }) {
   return (
-    <div>
+    <div className="page_body">
       <Pageflow />
       <div className="my_account_layout">
         <div className="my_account_left">

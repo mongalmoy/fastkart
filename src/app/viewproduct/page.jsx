@@ -1,6 +1,6 @@
 "use client";
 
-import "./shop.css";
+import "@/styles/component/viewproduct/shop.css";
 import { addItemToCart } from "@/react-redux/slices/carts/cartSlice";
 import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
@@ -25,6 +25,10 @@ export default function Shop() {
     quantity: 0,
     size: "M", // S -> Small, M -> Medium, L -> Large, XL -> Extra Large
   });
+  const [error, setError] = useState({
+    quantity: "",
+    size: "",
+  });
   /************* useStates ends ***************/
 
   console.log(productDetails);
@@ -34,6 +38,37 @@ export default function Shop() {
       prev[e.target.name] = e.target.value;
       return { ...prev };
     });
+    if (Number(e.target.value) > 0 && Number(e.target.value) <= 5) {
+      setError((prev) => ({ ...prev, quantity: "" }));
+    } else {
+      setError((prev) => ({
+        ...prev,
+        quantity: "No of products should be between 1 to 5",
+      }));
+    }
+  };
+
+  const handleProductSubmit = (e) => {
+    e.preventDefault();
+    if (
+      Number(productDetails.quantity) > 0 &&
+      Number(productDetails.quantity) <= 5
+    ) {
+      setError((prev) => ({ ...prev, quantity: "" }));
+      dispatch(
+        addItemToCart({
+          item: viewPageItem,
+          itemCnt: Number(productDetails.quantity),
+        })
+      );
+      toast?.success("Item added to cart");
+      router.push("/cart");
+    } else {
+      setError((prev) => ({
+        ...prev,
+        quantity: "No of products should be between 1 to 5",
+      }));
+    }
   };
 
   return (
@@ -82,58 +117,51 @@ export default function Shop() {
                 </div>
                 <div className="reviews">56,828 Ratings & 4,603 Reviews</div>
               </div>
-              <div className="product-options">
-                <label htmlFor="quantity" className="mb-2">
-                  Products Quantity
-                </label>
-                <input
-                  type="number"
-                  className="mb-2"
-                  id="quantity"
-                  name="quantity"
-                  min={1}
-                  max={5}
-                  value={productDetails.quantity}
-                  onChange={handleChange}
-                />
+              <form onSubmit={handleProductSubmit}>
+                <div className="product-options">
+                  <label htmlFor="quantity" className="mb-2">
+                    Products Quantity
+                  </label>
+                  <input
+                    type="number"
+                    className="mb-2"
+                    id="quantity"
+                    name="quantity"
+                    min={1}
+                    max={5}
+                    value={productDetails.quantity}
+                    onChange={handleChange}
+                  />
+                  {error.quantity && (
+                    <p className="error_msg">{error.quantity}</p>
+                  )}
 
-                <label htmlFor="size">Products Size</label>
-                <select
-                  name="size"
-                  id="size"
-                  value={productDetails.size}
-                  onChange={handleChange}
-                >
-                  <option value="S">Small</option>
-                  <option value="M">Medium</option>
-                  <option value="L">Large</option>
-                  <option value="XL">XL</option>
-                </select>
-              </div>
-              <div className="product-price">
-                <p>
-                  ₹{" "}
-                  {(
-                    Number(viewPageItem?.price) *
-                    Number(productDetails.quantity)
-                  )?.toFixed(2)}
-                </p>
-                <button
-                  className="page_button"
-                  onClick={() => {
-                    dispatch(
-                      addItemToCart({
-                        item: viewPageItem,
-                        itemCnt: Number(productDetails.quantity),
-                      })
-                    );
-                    toast?.success("Item added to cart");
-                    router.push("/cart");
-                  }}
-                >
-                  Add to Cart
-                </button>
-              </div>
+                  <label htmlFor="size">Products Size</label>
+                  <select
+                    name="size"
+                    id="size"
+                    value={productDetails.size}
+                    onChange={handleChange}
+                  >
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">XL</option>
+                  </select>
+                </div>
+                <div className="product-price">
+                  <p>
+                    ₹{" "}
+                    {(
+                      Number(viewPageItem?.price) *
+                      Number(productDetails.quantity)
+                    )?.toFixed(2)}
+                  </p>
+                  <button className="page_button" type="submit">
+                    Add to Cart
+                  </button>
+                </div>
+              </form>
             </div>
 
             <div className="product-thumbnails">

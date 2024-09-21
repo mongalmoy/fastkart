@@ -1,7 +1,7 @@
 "use client";
 
+import "@/styles/component/itemcart/productitem.css";
 import { Suspense, useContext } from "react";
-import "./productitem.css";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { FaShoppingCart } from "react-icons/fa";
 import { AppContext } from "../context/WrapperContext";

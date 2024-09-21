@@ -1,4 +1,4 @@
-import "./style.css";
+import "@/styles/app/my-account/edit/style.css";
 
 const EditAccount = () => {
   return (

@@ -1,56 +1,47 @@
-import "./footer.css";
+import "@/styles/component/footer/footer.css";
+import {
+  FaEnvelope,
+  FaGithub,
+  FaGoogle,
+  FaInstagram,
+  FaTwitter,
+} from "react-icons/fa";
+import { footerData } from "@/data/footer/footer";
 
 const Footer = () => {
+  const pages = footerData.pages;
+  const productCategories = footerData.productCategories;
+  const findUs = footerData.findUs;
+
   return (
     <footer className={`footer`}>
       <div className="footer-content">
         <div className="footer-column">
-          <h3>Pages</h3>
+          <h3>{pages.heading}</h3>
           <ul>
-            <li>
-              <a href="#">Shopping Cart</a>
-            </li>
-            <li>
-              <a href="#">Contact Us</a>
-            </li>
-            <li>
-              <a href="#">Shop</a>
-            </li>
-            <li>
-              <a href="#">My Account</a>
-            </li>
+            {pages.list.map((el) => (
+              <li key={el.name.toString()}>
+                <a href="#">{el.name}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="footer-column">
-          <h3>Top Products Categories</h3>
+          <h3>{productCategories.heading}</h3>
           <ul>
-            <li>
-              <a href="#">Jackets</a>
-            </li>
-            <li>
-              <a href="#">Accessories</a>
-            </li>
-            <li>
-              <a href="#">Coats</a>
-            </li>
-            <li>
-              <a href="#">Shoes</a>
-            </li>
-            <li>
-              <a href="#">Shirts</a>
-            </li>
+            {productCategories.list.map((el) => (
+              <li key={el.name.toString()}>
+                <a href="#">{el.name}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="footer-column">
-          <h3>Find Us</h3>
+          <h3>{findUs.heading}</h3>
           <div className="footer-contact">
-            <p>{"CheomYong's Market Inc."}</p>
-            <p>Manila, Philippines</p>
-            <p>091-2345-9868</p>
-            <p>CMMarket18@gmail.com</p>
-            <p>
-              <a href="#">Check our Contact Page</a>
-            </p>
+            {findUs.list.map((el) => (
+              <p key={el.name.toString()}>{el.name}</p>
+            ))}
           </div>
         </div>
         <div className="footer-column">
@@ -59,22 +50,22 @@ const Footer = () => {
             <input type="email" placeholder="Enter your email" required />
             <input type="submit" value="Subscribe" />
           </form>
-          <h3>Keep In Touch</h3>
+          <h3 className="mt-2 mb-4">Keep In Touch</h3>
           <div className="social-icons">
             <a href="#">
-              <i className="fa fa-facebook"></i>
+              <FaGithub />
             </a>
             <a href="#">
-              <i className="fa fa-instagram"></i>
+              <FaInstagram />
             </a>
             <a href="#">
-              <i className="fa fa-twitter"></i>
+              <FaTwitter />
             </a>
             <a href="#">
-              <i className="fa fa-google"></i>
+              <FaGoogle />
             </a>
             <a href="#">
-              <i className="fa fa-envelope"></i>
+              <FaEnvelope />
             </a>
           </div>
         </div>
