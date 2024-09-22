@@ -1,12 +1,11 @@
 "use client";
 
 import "@/styles/component/itemcart/productitem.css";
-import { Suspense, useContext } from "react";
+import {  useContext } from "react";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { FaShoppingCart } from "react-icons/fa";
 import { AppContext } from "../context/WrapperContext";
 import Image from "next/image";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "@/react-redux/slices/carts/cartSlice";
 import { setViewPageItem } from "@/react-redux/slices/viewpage/viewpageSlice";
@@ -21,17 +20,14 @@ const ProductItem = (props) => {
 
   return (
     <Card sx={{ maxWidth: 345 }} className="py-2">
-      <ErrorBoundary>
-        <Suspense fallback={<div>Product Image is loading</div>}>
-          <Image
-            src={props?.item?.imageURL}
-            alt={props?.item?.name}
-            className="product_image"
-            width={120}
-            height={140}
-          />
-        </Suspense>
-      </ErrorBoundary>
+      <Image
+        src={props?.item?.imageURL}
+        alt={props?.item?.name}
+        className="product_image"
+        width={120}
+        height={140}
+        loading="lazy"
+      />
       <CardContent className="py-1">
         <Typography gutterBottom variant="h5" component="div" className="m-0">
           {props?.item?.name}
@@ -53,10 +49,12 @@ const ProductItem = (props) => {
         <button
           className="page_button flexbox"
           onClick={() => {
-            dispatch(addItemToCart({
-              item: props?.item, 
-              itemCnt: 1
-            }));
+            dispatch(
+              addItemToCart({
+                item: props?.item,
+                itemCnt: 1,
+              })
+            );
             toast?.success("Item added to cart");
             router.push("/cart");
           }}

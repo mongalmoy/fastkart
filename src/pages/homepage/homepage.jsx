@@ -4,7 +4,7 @@ import "./homepage.css";
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
@@ -12,7 +12,17 @@ import dynamic from "next/dynamic";
 const LazyProductItem = dynamic(
   () => import("@/components/itemcart/productitem"),
   {
-    loading: () => <div>Product Item is loading...</div>,
+    loading: () => (
+      <>
+        <Skeleton
+          variant="rectangular"
+          width={"100%"}
+          height={240}
+          className="mb-2"
+        />
+        <Skeleton variant="rectangular" width={"100%"} height={50} />
+      </>
+    ),
   }
 );
 

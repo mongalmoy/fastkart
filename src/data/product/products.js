@@ -339,3 +339,21 @@ export const products = [
   //     "quantity": 4
   // }
 ];
+
+export const productFilter = {
+  productCategories: [
+    {name: "Polo", value: "polo"},
+    // {name: "Accessories", value: "Accessories"},
+    // {name: "Shoes", value: "Shoes"},
+    // {name: "Coats", value: "Coats"},
+    {name: "Hoodie", value: "hoodie"},
+    {name: "Basic", value: "basic"},
+    // {name: "Pants", value: "pants"},
+    // {name: "Saree", value: "saree"},
+    // {name: "Kurti", value: "kurti"},
+  ],
+  categories: [
+    {name: "Men", value: "men"},
+    {name: "Women", value: "women"},
+  ]
+}
