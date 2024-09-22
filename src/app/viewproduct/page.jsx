@@ -1,6 +1,6 @@
 "use client";
 
-import "@/styles/component/viewproduct/shop.css";
+import "@/styles/app/viewproduct/shop.css";
 import { addItemToCart } from "@/react-redux/slices/carts/cartSlice";
 import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
