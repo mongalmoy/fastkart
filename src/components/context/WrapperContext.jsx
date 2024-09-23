@@ -1,9 +1,6 @@
-"use client";
-
 import { createContext } from "react";
 import { message } from "antd";
-import { Provider } from "react-redux";
-import { store } from "@/react-redux/store";
+import { Providers } from "@/react-redux/provider";
 
 export const AppContext = createContext();
 
@@ -32,7 +29,7 @@ const WrapperContext = ({ children }) => {
   };
 
   return (
-    <Provider store={store}>
+    <Providers>
       <AppContext.Provider
         value={{
           toast: { success, error, warning },
@@ -41,7 +38,7 @@ const WrapperContext = ({ children }) => {
         {children}
         {contextHolder}
       </AppContext.Provider>
-    </Provider>
+    </Providers>
   );
 };
 
