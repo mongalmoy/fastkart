@@ -1,3 +1,5 @@
+"use client";
+
 import { combineReducers } from "redux";
 
 import productReducer from "./products/productSlice";
