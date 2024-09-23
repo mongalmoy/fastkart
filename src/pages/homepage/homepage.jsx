@@ -65,7 +65,7 @@ const Homepage = () => {
       </div>
 
       <div className="homepage_product_card my-5">
-        {homepagecard.map((el, ind) => {
+        {homepagecard?.map((el, ind) => {
           return <HomepageCard key={ind} name={el.name} text={el.content} />;
         })}
       </div>
