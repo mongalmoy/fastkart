@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        &copy; {"Fastkart Inc - 2024. All rights reserved."}
+        {"Made with"} &#x2764;&#xfe0f; {"by Mongalmoy Karmakar."} &copy;2024
       </div>
     </footer>
   );
