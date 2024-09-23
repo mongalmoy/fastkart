@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext } from "react";
 import { message } from "antd";
 import { Providers } from "@/react-redux/provider";
