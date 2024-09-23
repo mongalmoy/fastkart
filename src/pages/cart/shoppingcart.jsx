@@ -52,7 +52,7 @@ const ShoppingCart = () => {
   );
   /********************** useRef ends ***************************/
 
-  console.log(cartListRef.current);
+  // console.log(cartListRef.current);
 
   const totalCartItems = cartList?.reduce(
     (total, el) => (total += Number(el?.quantity)),
@@ -71,7 +71,7 @@ const ShoppingCart = () => {
       ?.filter((el) => delArr?.includes(el?.id))
       ?.map((el) => ({ id: el?.id, count: el?.quantity }));
 
-    console.log("itemsToDelete", itemsToDelete)
+    // console.log("itemsToDelete", itemsToDelete)
 
     dispatch(removeItemToCart(itemsToDelete));
     cartListRef.current = cartListRef.current?.filter(el => !el?.isChecked)
@@ -89,7 +89,7 @@ const ShoppingCart = () => {
       ) > 0
     );
   };
-  console.log("cartListRef", cartListRef);
+  // console.log("cartListRef", cartListRef);
 
   return (
     <div className="shopping_cart_container">

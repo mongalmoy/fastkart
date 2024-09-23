@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const OrderSummery = () => {
-  const cartList = useSelector(state => state?.cart?.cartList);
+  const cartList = useSelector((state) => state?.cart?.cartList);
 
   const subTotal = cartList?.reduce((total, el) => total+=(el.price * el.quantity), 0)
   const gst = subTotal * 0.12;
