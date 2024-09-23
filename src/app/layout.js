@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 
 const LazyFooter = dynamic(() => import("@/components/footer/footer"), {
   loading: () => <div>Footer is loading...</div>,
+  ssr: false,
 });
 
 const inter = Inter({ subsets: ["latin"] });
