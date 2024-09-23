@@ -1,6 +1,6 @@
 "use client";
 
-import "./homepage.css";
+import "@/styles/pages/homepage/homepage.css";
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";

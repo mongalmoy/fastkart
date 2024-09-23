@@ -19,7 +19,7 @@ export default function Cart() {
     <div className="cart">
       {cartList?.length === 0 ? (
         <div>
-          <Alert severity="warning" showIcon className="mb-5">
+          <Alert severity="warning" className="mb-5">
             <AlertTitle>Your basket is empty</AlertTitle>
             {`To continue with your purchase, please ensure that you've added at
             least one item to your cart.`}

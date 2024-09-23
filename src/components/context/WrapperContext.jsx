@@ -1,25 +1,13 @@
 "use client";
 
-import { createContext, useReducer } from "react";
+import { createContext } from "react";
 import { message } from "antd";
-import { products } from "@/data/product/products";
 import { Provider } from "react-redux";
 import { store } from "@/react-redux/store";
 
 export const AppContext = createContext();
 
 const WrapperContext = ({ children }) => {
-  const initialState = {
-    user: null,
-    isLoggedIn: false,
-    product: {
-      productList: products,
-    },
-    cart: {
-      cartList: [],
-    },
-    currentPage: "",
-  };
 
   const [messageApi, contextHolder] = message.useMessage();
 
