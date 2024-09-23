@@ -83,6 +83,7 @@ export default function Shop() {
                 alt="Nike x Stussy Tee"
                 width={400}
                 height={400}
+                priority
               />
             </div>
             <div className="buy_now_add_to_cart_cont">
@@ -173,6 +174,7 @@ export default function Shop() {
                       alt="Thumbnail 1"
                       width={100}
                       height={100}
+                      loading="lazy"
                     />
                   </div>
                 );

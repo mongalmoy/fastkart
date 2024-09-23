@@ -44,8 +44,7 @@ const Homepage = () => {
             width={600}
             height={200}
             alt="homepage_image"
-            loading="lazy"
-            // loader={"Homepage image loading..."}
+            priority
           />
           <div className="homepage_image_content">
             <div className="image_left_content">

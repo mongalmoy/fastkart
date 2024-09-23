@@ -1,7 +1,6 @@
 import "@/styles/pages/user/userprofilecard/UserProfileCard.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 
 import { AiOutlineBars } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
@@ -22,24 +21,27 @@ const menuList = [
 const UserProfileCard = () => {
   return (
     <div className="card-container">
-      <Suspense fallback={<div>Image is loading...</div>}>
-        <Image
-          src={"/assets/img/user/user_photo.jpg"} // Replace with your image URL
-          alt="User Profile"
-          className="profile-image"
-          height={100}
-          width={100}
-        />
-      </Suspense>
+      <Image
+        src={"/assets/img/user/user_photo.jpg"} // Replace with your image URL
+        alt="User Profile"
+        className="profile-image"
+        height={100}
+        width={100}
+        loading="lazy"
+      />
       <h2 className="user-name">Mongalmoy Karmakar</h2>
       <ul className="menu-list">
-        {menuList.map((el,ind) => {
+        {menuList.map((el, ind) => {
           return (
-<Link key={ind} className="menu-item" href={"/my-account/" + el.href}>
-          {el.icon}
-          <span>{el.name}</span>
-        </Link>
-          )
+            <Link
+              key={ind}
+              className="menu-item"
+              href={"/my-account/" + el.href}
+            >
+              {el.icon}
+              <span>{el.name}</span>
+            </Link>
+          );
         })}
       </ul>
     </div>

@@ -187,6 +187,7 @@ const ShoppingCart = () => {
                       alt={el?.name}
                       width={40}
                       height={40}
+                      loading="lazy"
                     />
                   </TableCell>
                   <TableCell align="left">{el?.name}</TableCell>
@@ -240,7 +241,7 @@ const ShoppingCart = () => {
                   Total
                 </Typography>
               </TableCell>
-              {Array.from({ length: 4 }).map((el) => (
+              {Array.from({ length: 4 }).map((_,ind) => ind+1).map((el) => (
                 <TableCell key={el?.toString()}></TableCell>
               ))}
               <TableCell align="left">

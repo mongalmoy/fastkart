@@ -26,7 +26,7 @@ const ProductItem = (props) => {
         className="product_image"
         width={120}
         height={140}
-        loading="lazy"
+        priority
       />
       <CardContent className="py-1">
         <Typography gutterBottom variant="h5" component="div" className="m-0">
