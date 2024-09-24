@@ -1,5 +1,3 @@
-"use client";
-
 import { products } from "@/data/product/products";
 import { createSlice } from "@reduxjs/toolkit";
 
