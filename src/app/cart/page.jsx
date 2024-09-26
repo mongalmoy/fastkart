@@ -1,8 +1,8 @@
 "use client";
 
 import "@/styles/app/cart/cart.css";
-import OrderSummery from "@/pages/cart/ordersummery";
-import ShoppingCart from "@/pages/cart/shoppingcart";
+import OrderSummery from "@/page/cart/ordersummery";
+import ShoppingCart from "@/page/cart/shoppingcart";
 import { Alert, AlertTitle, Button, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";

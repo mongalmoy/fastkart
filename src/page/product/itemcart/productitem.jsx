@@ -4,7 +4,7 @@ import "@/styles/component/itemcart/productitem.css";
 import {  useContext } from "react";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { FaShoppingCart } from "react-icons/fa";
-import { AppContext } from "../context/WrapperContext";
+import { AppContext } from "../../../components/context/WrapperContext";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "@/react-redux/slices/carts/cartSlice";

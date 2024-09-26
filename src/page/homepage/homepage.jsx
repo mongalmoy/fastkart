@@ -1,6 +1,4 @@
-"use client";
-
-import "@/styles/pages/homepage/homepage.css";
+import "@/styles/page/homepage/homepage.css";
 
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
@@ -11,7 +9,7 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 
 const LazyProductItem = dynamic(
-  () => import("@/components/itemcart/productitem"),
+  () => import("@/page/product/itemcart/productitem"),
   {
     loading: () => (
       <>
@@ -30,6 +28,8 @@ const LazyProductItem = dynamic(
 
 const Homepage = () => {
   const products = useSelector((state) => state?.product?.productList);
+
+  console.log("This is homepage................")
 
   return (
     <div className="homepage_container">

@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/styles/pages/auth/Entry.module.css";
+import styles from "@/styles/page/auth/Entry.module.css";
 import { FaFacebook, FaGoogle, FaLinkedin, FaPinterest } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 

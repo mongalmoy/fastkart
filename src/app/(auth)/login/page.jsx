@@ -1,4 +1,4 @@
-import Entry from '@/pages/auth/Entry'
+import Entry from '@/page/auth/Entry'
 
 const Login = () => {
   return (

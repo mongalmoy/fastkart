@@ -1,4 +1,4 @@
-import "@/styles/pages/user/userprofilecard/UserProfileCard.css";
+import "@/styles/page/user/userprofilecard/UserProfileCard.css";
 import Image from "next/image";
 import Link from "next/link";
 

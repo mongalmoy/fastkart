@@ -1,5 +1,5 @@
 export const footerData = {
-  pages : {
+  page : {
     heading: "Pages",
     list: [
       {name: "Shopping Cart"},

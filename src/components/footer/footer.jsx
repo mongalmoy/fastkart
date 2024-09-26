@@ -9,7 +9,7 @@ import {
 import { footerData } from "@/data/footer/footer";
 
 const Footer = () => {
-  const pages = footerData.pages;
+  const page = footerData.page;
   const productCategories = footerData.productCategories;
   const findUs = footerData.findUs;
 
@@ -17,9 +17,9 @@ const Footer = () => {
     <footer className={`footer`}>
       <div className="footer-content">
         <div className="footer-column">
-          <h3>{pages.heading}</h3>
+          <h3>{page.heading}</h3>
           <ul>
-            {pages.list.map((el) => (
+            {page.list.map((el) => (
               <li key={el.name.toString()}>
                 <a href="#">{el.name}</a>
               </li>

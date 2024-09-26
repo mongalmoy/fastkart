@@ -1,12 +1,16 @@
 import Navigationbar from "@/components/NavigationBar/navigationbar";
-import Homepage from "@/pages/homepage/homepage";
+import dynamic from "next/dynamic";
+
+const LazyHomepage = dynamic(() => import("@/page/homepage/homepage"), {
+  ssr: false,
+})
 
 export default function Home() {
   return (
     <>
       <Navigationbar />
       <div className="page_body">
-        <Homepage />
+        <LazyHomepage />
       </div>
     </>
   );

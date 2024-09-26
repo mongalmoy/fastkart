@@ -1,6 +1,6 @@
 "use client";
 
-import '@/styles/pages/user/deleteaccout/DeleteAccount.css'; // Import the CSS file
+import '@/styles/page/user/deleteaccout/DeleteAccount.css'; // Import the CSS file
 import { useState } from 'react';
 
 const DeleteAccount = () => {

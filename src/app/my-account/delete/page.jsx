@@ -1,4 +1,4 @@
-import DeleteAccount from "@/pages/user/DeleteAccount/DeleteAccount"
+import DeleteAccount from "@/page/user/DeleteAccount/DeleteAccount"
 
 const DeleteUserAccount = () => {
   return (
