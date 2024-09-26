@@ -1,36 +1,15 @@
 import "@/styles/page/homepage/homepage.css";
-
 import Image from "next/image";
 import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
-import { Grid, Skeleton } from "@mui/material";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
-import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 
-const LazyProductItem = dynamic(
-  () => import("@/page/product/itemcart/productitem"),
-  {
-    loading: () => (
-      <>
-        <Skeleton
-          variant="rectangular"
-          width={"100%"}
-          height={240}
-          className="mb-2"
-        />
-        <Skeleton variant="rectangular" width={"100%"} height={50} />
-      </>
-    ),
-    ssr: false,
-  }
-);
+const LazyHomepageProducts = dynamic(() => import("./HomepageProducts"), {
+  ssr: false,
+})
 
-const Homepage = () => {
-  const products = useSelector((state) => state?.product?.productList);
-
-  console.log("This is homepage................")
-
+const HomePage = () => {
   return (
     <div className="homepage_container">
       <div className="homepage_mega_img_container">
@@ -73,28 +52,9 @@ const Homepage = () => {
 
       <h1 className="our_latest_products my-4">Our Latest Products</h1>
 
-      <Grid container spacing={3} className="product_items_container mt-5">
-        {products?.map((el, ind) => {
-          return (
-            <Grid key={ind} item xs={6} md={4} lg={3}>
-              <LazyProductItem
-                item={el}
-                id={el?.id}
-                imgUrl={el.imageURL}
-                name={el.name}
-                price={el.price}
-                type={el.type}
-                currency={el.currency}
-                color={el.color}
-                gender={el.gender}
-                quantity={el.quantity}
-              />
-            </Grid>
-          );
-        })}
-      </Grid>
+      <LazyHomepageProducts />
     </div>
   );
 };
 
-export default Homepage;
+export default HomePage;
