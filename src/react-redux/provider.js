@@ -6,5 +6,6 @@ import { makeStore } from "./store";
 
 export function Providers({ children, initialReduxState }) {
   const [store] = useState(() => makeStore(initialReduxState))
+  console.log("store", store)
   return <Provider store={store}>{children}</Provider>;
 }

@@ -1,5 +1,5 @@
 import Navigationbar from "@/components/NavigationBar/navigationbar";
-import HomePage from "@/page/HomePage/HomePage";
+import HomePage from "@/page/homepage/HomePage";
 
 export default function Home() {
   return (
