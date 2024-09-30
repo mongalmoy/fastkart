@@ -13,7 +13,7 @@
   --background-end-rgb: 255, 255, 255;
 
   --header-bg: #2172ed;
-  --header-height: 60px;
+  --header-height: 46px;
   --header-nav-height: 80px;
 
   --button-bg: #3d809c;
@@ -97,4 +97,13 @@ body {
   color: red;
   font-size: 11px;
   margin-bottom: 10px;
+}
+
+/** Screen Width below 600px **/
+@media screen and (width<600px) {
+  .page_body {
+    min-height: calc(100vh - var(--header-height) - 56px);
+    padding-bottom: 70px;
+    padding-top: 0;
+  }
 }

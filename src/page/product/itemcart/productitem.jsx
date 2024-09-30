@@ -19,7 +19,7 @@ const ProductItem = (props) => {
   const router = useRouter();
 
   return (
-    <Card sx={{ maxWidth: 345 }} className="py-2">
+    <Card sx={{ maxWidth: 345 }} className="product_item py-2">
       <Image
         src={props?.item?.imageURL}
         alt={props?.item?.name}
@@ -29,10 +29,10 @@ const ProductItem = (props) => {
         priority
       />
       <CardContent className="py-1">
-        <Typography gutterBottom variant="h5" component="div" className="m-0">
+        <Typography gutterBottom variant="h5" component="div" className="product_name m-0">
           {props?.item?.name}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h6" component="div" className="product_price">
           ₹ {props?.item?.price}
         </Typography>
       </CardContent>
@@ -59,7 +59,7 @@ const ProductItem = (props) => {
             router.push("/cart");
           }}
         >
-          <FaShoppingCart className="me-1" /> Add to Cart
+          <FaShoppingCart className="product_add_to_cart_icon me-1" /> Add to Cart
         </button>
       </CardActions>
     </Card>

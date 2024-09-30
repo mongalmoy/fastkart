@@ -7,6 +7,7 @@ const MyOrders = () => {
       <p className="orders-subtitle">Your orders in one place</p>
       <p className="orders-help">If you have any questions, feel free to contact us. Our Customer Service works 24/7</p>
       
+      <div className="order_table_container">
       <table className="orders-table">
         <thead>
           <tr>
@@ -53,6 +54,7 @@ const MyOrders = () => {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   )
 }

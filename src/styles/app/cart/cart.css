@@ -1,13 +1,17 @@
 .cart {
   /* display: flex;
   align-items: center; */
-  padding: 12px 60px;
+  padding: 12px 30px;
   margin: 20px 0;
 }
 .shopping_cart_container {
   background-color: #fff;
   border-radius: 6px;
   padding: 16px;
+}
+.shoppingcart_table_container {
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 .shopping_cart_heading {
   font-weight: 500;
@@ -60,4 +64,22 @@
 .plus_minus_icon_holder:hover {
   background-color: #555555;
   color: #fff;
+}
+
+
+/** Screen width below 600px **/
+@media screen and (width<600px) {
+  .cart {
+    margin: 0;
+    padding: 12px;
+  }
+  .cart_summery_div {
+    width: 100%;
+  }
+  .cart_empty_alert {
+    font-size: 12px;
+  }
+  .cart_empty_btn {
+    font-size: 12px;
+  }
 }

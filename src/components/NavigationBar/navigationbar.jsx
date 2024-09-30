@@ -16,9 +16,9 @@ const Navigationbar = () => {
 
   return (
     <div className="navigation_bar">
-      <div className="app_logo" onClick={() => router.push("/")}>
+      {/* <div className="app_logo" onClick={() => router.push("/")}>
         <span className="fast_color">Fast</span>Kart
-      </div>
+      </div> */}
       <div className="navigation_items">
         {navbarLinks.map((el, ind) => {
           return (
@@ -40,11 +40,12 @@ const Navigationbar = () => {
         </button>
         <button className="page_button cart_button flexbox">
           <FaShoppingCart className="me-1" />
-          {cartlist?.reduce(
-            (total, el) => (total += Number(el?.quantity)),
-            0
-          )}{" "}
-          Items in your Cart
+          <span className="noOfItems_redIcon">
+            {cartlist?.reduce(
+              (total, el) => (total += Number(el?.quantity)),
+              0
+            )}
+          </span>
         </button>
       </div>
     </div>

@@ -31,6 +31,10 @@
   margin-bottom: 30px;
   font-style: italic;
 }
+.order_table_container {
+  overflow-x: scroll;
+    overflow-y: hidden;
+}
 
 .orders-table {
   width: 100%;

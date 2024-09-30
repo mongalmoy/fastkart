@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import NoResultPage from '@/components/NoResultPage/NoResultPage';
-import { Grid, Skeleton } from '@mui/material';
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import ProductFilter from './productfilter/productfilter';
+import NoResultPage from "@/components/NoResultPage/NoResultPage";
+import { Grid, Skeleton } from "@mui/material";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import ProductFilter from "./productfilter/productfilter";
+import FilterOption from "./FilterOption";
 
 const LazyProductItem = dynamic(
   () => import("@/page/product/itemcart/productitem"),
@@ -81,42 +82,56 @@ const ProductPage = () => {
   // console.log("products", products);
 
   return (
-    <div className="product_page">
-      <ProductFilter
-        inputText={inputText}
-        handleInputChange={handleInputChange}
-        handleEraseInput={handleEraseInput}
-        handleFilter={handleFilter}
-        handleFilterByGender={handleFilterByGender}
-      />
-      <div className="products_container">
-        {products?.length > 0 ? (
-          <Grid container spacing={3}>
-            {products?.map((el, ind) => {
-              return (
-                <Grid key={el?.toString() + ind} item xs={6} md={4} lg={3}>
-                  <LazyProductItem
-                    item={el}
-                    id={el?.id}
-                    imgUrl={el.imageURL}
-                    name={el.name}
-                    price={el.price}
-                    type={el.type}
-                    currency={el.currency}
-                    color={el.color}
-                    gender={el.gender}
-                    quantity={el.quantity}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        ) : (
-          <NoResultPage />
-        )}
+    <section className="product_page">
+      <FilterOption />
+      <div className="product_page_inner">
+        <ProductFilter
+          inputText={inputText}
+          handleInputChange={handleInputChange}
+          handleEraseInput={handleEraseInput}
+          handleFilter={handleFilter}
+          handleFilterByGender={handleFilterByGender}
+        />
+        <div className="products_container">
+          {products?.length > 0 ? (
+            <Grid container spacing={3} style={{ marginTop: 0 }}>
+              {products?.map((el, ind) => {
+                return (
+                  <Grid
+                    key={el?.toString() + ind}
+                    item
+                    xs={6}
+                    md={4}
+                    lg={3}
+                    style={{
+                      marginTop: 0,
+                      paddingTop: 0,
+                      marginBottom: "24px",
+                    }}
+                  >
+                    <LazyProductItem
+                      item={el}
+                      id={el?.id}
+                      imgUrl={el.imageURL}
+                      name={el.name}
+                      price={el.price}
+                      type={el.type}
+                      currency={el.currency}
+                      color={el.color}
+                      gender={el.gender}
+                      quantity={el.quantity}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          ) : (
+            <NoResultPage />
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
-export default ProductPage
+export default ProductPage;

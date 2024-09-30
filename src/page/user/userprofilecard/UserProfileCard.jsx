@@ -20,7 +20,7 @@ const menuList = [
 
 const UserProfileCard = () => {
   return (
-    <div className="card-container">
+    <div className="card-container userProfileCard">
       <Image
         src={"/assets/img/user/user_photo.jpg"} // Replace with your image URL
         alt="User Profile"

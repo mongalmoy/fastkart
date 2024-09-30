@@ -19,13 +19,14 @@ export default function Cart() {
     <div className="cart">
       {cartList?.length === 0 ? (
         <div>
-          <Alert severity="warning" className="mb-5">
+          <Alert severity="warning" className="cart_empty_alert mb-5">
             <AlertTitle>Your basket is empty</AlertTitle>
             {`To continue with your purchase, please ensure that you've added at
             least one item to your cart.`}
           </Alert>
 
           <Button
+            className="cart_empty_btn"
             role={undefined}
             variant="contained"
             startIcon={<FaPlus />}
@@ -41,7 +42,7 @@ export default function Cart() {
           <Grid item lg={8} md={8} sm={12} className="p-0">
             <ShoppingCart />
           </Grid>
-          <Grid item lg={4} md={4} sm={12}>
+          <Grid item lg={4} md={4} sm={12} className="cart_summery_div">
             <OrderSummery />
           </Grid>
         </Grid>

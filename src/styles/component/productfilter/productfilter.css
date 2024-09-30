@@ -84,3 +84,14 @@
   color: #0055a5;
   text-decoration: underline;
 }
+
+/** Screen width below 600px **/
+@media screen and (width<600px) {
+  .product_category {
+    width: 100%;
+    font-size: 12px;
+  }
+  .input_text {
+    width: 100%;
+  }
+}

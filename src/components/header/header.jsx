@@ -1,18 +1,28 @@
 import "@/styles/component/header/header.css";
-import { headerLinks } from "@/data/header";
 import Link from "next/link";
+import { headerLinks } from "@/data/header";
+import dynamic from "next/dynamic";
+
+const LazyHeaderCartIcon = dynamic(() => import("./HeaderCartIcon"), {ssr: false});
 
 const Header = () => {
   return (
     <div className="header">
       <Link href={"/"}>
-        <button className="welcome flexbox">Welcome</button>
+        <button className="welcome flexbox">Fastkart</button>
       </Link>
 
       <div className="header_links">
         {headerLinks.map((el, ind) => (
-          <Link key={el?.toString() + ind} href={el.link}>
-            <button className="header_item">{el.name}</button>
+          <Link key={el?.toString() + ind} href={el.link} className={el.className+"_a"}>
+            {el?.name?.toLowerCase() === "cart" ? (
+              <LazyHeaderCartIcon className={el.className} icon={el.icon} />
+            ) : (
+              <button className={el.className}>
+                {el.icon}
+                {el.showName && el.name}
+              </button>
+            )}
           </Link>
         ))}
       </div>

@@ -135,7 +135,7 @@ const ShoppingCart = () => {
         </Toolbar>
       ) : null}
 
-      <TableContainer>
+      <TableContainer className="shoppingcart_table_container">
         <Table aria-labelledby="tableTitle" size={"medium"}>
           <TableHead>
             <TableRow>
@@ -234,7 +234,7 @@ const ShoppingCart = () => {
               );
             })}
           </TableBody>
-          <TableFooter>
+          {/* <TableFooter>
             <TableRow>
               <TableCell align="left">
                 <Typography color={"#000"} fontSize={17} variant="subtitle2">
@@ -255,20 +255,31 @@ const ShoppingCart = () => {
                 </Typography>
               </TableCell>
             </TableRow>
-          </TableFooter>
+          </TableFooter> */}
         </Table>
       </TableContainer>
 
       <ButtonGroup
-        className="align_right mt-4"
+        className="flex justify-between mt-4"
         variant="outlined"
         aria-label="Loading button group"
         size="small"
       >
+        <div className="totoal_price">
+          <label>Totoal</label>
+          <b>{"₹  "}
+                  {cartList?.reduce(
+                    (total, el) =>
+                      (total += Number(el?.price) * Number(el?.quantity)),
+                    0
+                  )}</b>
+        </div>
+        <div>
         <Button>
-          <Link href="/">Continue Shopping</Link>
+          <Link href="/">Home</Link>
         </Button>
-        <Button variant="contained">Proceed Checkout</Button>
+        <Button variant="contained">Checkout</Button>
+        </div>
         {/* <LoadingButton loading loadingPosition="start" startIcon={<SaveIcon />}>
           Save
         </LoadingButton> */}
