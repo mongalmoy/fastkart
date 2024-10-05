@@ -54,7 +54,7 @@ const OrderSummery = () => {
             Order sub total
           </Typography>
           <Typography variant="h6" fontSize={14}>
-            {"₹  "}{Number(subTotal) + Number(gst) + Number(handlingFees)}
+            <b>{"₹"}{Number(subTotal) + Number(gst) + Number(handlingFees)}</b>
           </Typography>
         </div>
       </div>

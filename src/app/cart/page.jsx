@@ -39,7 +39,7 @@ export default function Cart() {
         </div>
       ) : (
         <Grid container spacing={3}>
-          <Grid item lg={8} md={8} sm={12} className="p-0">
+          <Grid item lg={8} md={8} sm={12} className="p-0 w-full">
             <ShoppingCart />
           </Grid>
           <Grid item lg={4} md={4} sm={12} className="cart_summery_div">

@@ -1,7 +1,8 @@
 .edit-account-container {
   width: 100%;
   margin: 0;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
+  background-color: #fff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,4 +64,13 @@
 
 .form-button:hover {
   background-color: #0056b3;
+}
+
+
+
+/** Screen width less than 600px **/
+@media screen and (width<600px) {
+  .edit-account-title{
+    font-size: 22px;
+  }
 }

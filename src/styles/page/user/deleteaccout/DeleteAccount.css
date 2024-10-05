@@ -1,7 +1,8 @@
 .delete-account-container {
   width: 100%;
   margin: 0;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
+  background-color: #fff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -68,4 +69,14 @@
 
 .delete-button:hover {
   background-color: #c9302c !important;
+}
+
+/** Screen width less than 600px **/
+@media screen and (width<600px) {
+  .delete-account-title {
+    font-size: 22px;
+  }
+  .delete-account-text, .delete-account-form {
+    font-size: 14px;
+  }
 }

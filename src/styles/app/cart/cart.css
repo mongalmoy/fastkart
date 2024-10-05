@@ -12,10 +12,14 @@
 .shoppingcart_table_container {
   overflow-x: scroll;
   overflow-y: hidden;
+  box-shadow: 0 0 2px 2px #f2f2f2c4;
+  padding: 0 10px;
+  border-radius: 8px;
+  margin: 16px 0;
 }
 .shopping_cart_heading {
   font-weight: 500;
-  font-size: 28px;
+  font-size: 22px;
 }
 .cart_text {
   font-size: 10px;
@@ -24,13 +28,15 @@
 }
 .order_summery {
   background-color: #fff;
+  border-radius: 6px;
 }
 .order_summery h1 {
   background-color: #e5e5e5;
-  font-weight: 400;
-  font-size: 28px;
+  font-weight: 500;
+  font-size: 22px;
   text-align: center;
   padding: 18px 12px;
+  border-radius: 6px 6px 0 0;
 }
 .order_description_container {
   padding: 16px 24px;
@@ -65,8 +71,12 @@
   background-color: #555555;
   color: #fff;
 }
-
-
+.shopping_cart_btns button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.shopping_cart_btns button:last-child {
+  border-radius: 0 4px 4px 0;
+}
 /** Screen width below 600px **/
 @media screen and (width<600px) {
   .cart {
@@ -81,5 +91,13 @@
   }
   .cart_empty_btn {
     font-size: 12px;
+  }
+  .shopping_cart_thead tr th {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+  .shopping_cart_tbody tr td {
+    font-size: 14px;
+    padding: 8px 16px;
   }
 }

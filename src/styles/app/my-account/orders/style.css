@@ -79,3 +79,11 @@
   /* background-color: #0056b3; */
   background-color: #419541;
 }
+
+
+/** Screen width less than 600px **/
+@media screen and (width<600px) {
+  .orders-title {
+    font-size: 22px;
+  }
+}

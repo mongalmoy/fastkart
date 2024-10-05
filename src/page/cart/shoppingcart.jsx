@@ -74,7 +74,7 @@ const ShoppingCart = () => {
     // console.log("itemsToDelete", itemsToDelete)
 
     dispatch(removeItemToCart(itemsToDelete));
-    cartListRef.current = cartListRef.current?.filter(el => !el?.isChecked)
+    cartListRef.current = cartListRef.current?.filter((el) => !el?.isChecked);
     toast?.success("Items lists deleted from your cart");
   };
 
@@ -136,8 +136,8 @@ const ShoppingCart = () => {
       ) : null}
 
       <TableContainer className="shoppingcart_table_container">
-        <Table aria-labelledby="tableTitle" size={"medium"}>
-          <TableHead>
+        <Table aria-labelledby="simple table" size={"medium"}>
+          <TableHead className="shopping_cart_thead">
             <TableRow>
               <TableCell align="left" className="ps-0">
                 Item Checkbox
@@ -159,7 +159,7 @@ const ShoppingCart = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className="shopping_cart_tbody">
             {cartList?.map((el, index) => {
               return (
                 <TableRow
@@ -260,25 +260,27 @@ const ShoppingCart = () => {
       </TableContainer>
 
       <ButtonGroup
-        className="flex justify-between mt-4"
+        className="flex justify-between mt-4 w-full"
         variant="outlined"
         aria-label="Loading button group"
         size="small"
       >
         <div className="totoal_price">
-          <label>Totoal</label>
-          <b>{"₹  "}
-                  {cartList?.reduce(
-                    (total, el) =>
-                      (total += Number(el?.price) * Number(el?.quantity)),
-                    0
-                  )}</b>
+          <label>Totoal:</label>
+          <b>
+            {" ₹"}
+            {cartList?.reduce(
+              (total, el) =>
+                (total += Number(el?.price) * Number(el?.quantity)),
+              0
+            )}
+          </b>
         </div>
-        <div>
-        <Button>
-          <Link href="/">Home</Link>
-        </Button>
-        <Button variant="contained">Checkout</Button>
+        <div className="shopping_cart_btns">
+          <Button>
+            <Link href="/">Home</Link>
+          </Button>
+          <Button variant="contained">Checkout</Button>
         </div>
         {/* <LoadingButton loading loadingPosition="start" startIcon={<SaveIcon />}>
           Save

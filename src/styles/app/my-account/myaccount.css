@@ -1,5 +1,5 @@
 .my_account_layout {
-  margin: 24px 60px;
+  margin: 24px 30px;
   display: flex;
   gap: 24px;
 }
@@ -7,12 +7,15 @@
   width: 100%;
 }
 
+
+
 /** Screen width below 600px **/
 @media screen and (width < 600px) {
   .my_account_layout {
     margin: 0;
     flex-direction: column;
     padding: 6px 12px;
+    gap: 10px;
   }
   .userProfileCard {
     width: 100%;
