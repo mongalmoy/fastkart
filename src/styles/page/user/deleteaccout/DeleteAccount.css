@@ -1,0 +1,82 @@
+.delete-account-container {
+  width: 100%;
+  margin: 0;
+  /* background-color: #f7f7f7; */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.delete-account-title {
+  font-size: 28px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.delete-account-text {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.delete-account-form .form-group {
+  margin-bottom: 20px;
+}
+
+.delete-account-form .form-group label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.delete-account-form .form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.delete-account-form .form-input:focus {
+  border-color: #d9534f;
+}
+
+.form-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.delete-button {
+  background-color: #d9534f !important;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c9302c !important;
+}
+
+/** Screen width less than 600px **/
+@media screen and (width<600px) {
+  .delete-account-title {
+    font-size: 22px;
+  }
+  .delete-account-text, .delete-account-form {
+    font-size: 14px;
+  }
+}

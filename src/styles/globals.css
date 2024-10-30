@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@fontsource /roboto/300.css;
+@fontsource /roboto/400.css;
+@fontsource /roboto/500.css;
+@fontsource /roboto/700.css;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  --header-bg: #2172ed;
+  --header-height: 46px;
+  --header-nav-height: 80px;
+
+  --button-bg: #3d809c;
+  --button-bg-hover: #2b6882;
+
+  --homepage-bg: #e8f1ff;
+
+  --shade-color-bg: #e6e6e6;
+
+
+
+  --primary-color: #2d9cdb; /* Cool Blue */
+  --secondary-color: #38c9e0; /* Cyan */
+  --neutral-dark: #333;
+  --neutral-light: #f5f5f5;
+  --neutral-gray: #888;
+  --accent-color: #56ccf2; /* Light Blue accent */
+  --button-hover: #1b83b8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.flexbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page_button {
+  background-color: var(--button-bg);
+  color: #fff;
+  font-size: 13px;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+}
+.page_button:hover {
+  background-color: var(--button-bg-hover);
+}
+.page_button_outline {
+  color: var(--button-bg);
+  background: #fff;
+  border: 1px solid var(--button-bg);
+  font-size: 13px;
+  border-radius: 6px;
+  outline: none;
+  padding: 5px 10px;
+}
+.page_button svg {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.page_body {
+  background-color: var(--homepage-bg);
+  padding: 20px 0;
+  position: relative;
+  /* top: calc(var(--header-height) + var(--header-nav-height)); */
+  left: 0;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height) - var(--header-nav-height));
+  padding-bottom: 48px;
+}
+.page_body html {
+  min-height: calc(100vh - var(--header-height) - var(--header-nav-height));
+}
+.align_right {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.error_msg {
+  color: red;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+/** Screen Width below 600px **/
+@media screen and (width<600px) {
+  .page_body {
+    min-height: calc(100vh - var(--header-height) - 56px);
+    padding-bottom: 70px;
+    padding-top: 0;
+  }
+}

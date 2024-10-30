@@ -1,0 +1,48 @@
+.my_account_layout {
+  margin: 24px 30px;
+  display: flex;
+  gap: 24px;
+}
+.my_account_right {
+  width: 100%;
+}
+
+
+
+/** Screen width below 600px **/
+@media screen and (width < 600px) {
+  .my_account_layout {
+    margin: 0;
+    flex-direction: column;
+    padding: 6px 12px;
+    gap: 10px;
+  }
+  .userProfileCard {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .user-name {
+    display: none;
+  }
+  .profile-image {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 6px 12px !important;
+  }
+  .menu-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .menu-item {
+    flex-direction: column;
+    margin: 0;
+  }
+  .menu-item span {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,20 @@
+
+
+.pageflow_container {
+  display: block;
+}
+.pageflow_content {
+  background-color: #fff;
+  margin: 0 30px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px 2px #e0e0e0;
+}
+
+
+/** Below 600px **/
+@media screen and (width < 600px) {
+  .pageflow_container{
+    display: none;
+  }
+}

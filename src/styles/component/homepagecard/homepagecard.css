@@ -1,0 +1,13 @@
+.homepage_card {
+  width: 300px;
+  padding: 12px 22px;
+  background-color: #fff;
+}
+.content_heading {
+  font-size: 22px;
+  color: #093C89;
+}
+.content_text {
+  font-size: 13px;
+  color: #000;
+}

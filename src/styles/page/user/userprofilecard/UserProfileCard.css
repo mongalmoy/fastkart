@@ -1,0 +1,122 @@
+.userProfileCard {
+  width: 220px;
+  /* background-color: #f2f2f2; */
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.userProfileCard:hover {
+  /* transform: translateY(-5px); */
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px auto;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.1);
+}
+
+.user-name {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  font-size: 16px;
+  padding: 0;
+  margin-bottom: 10px;
+  color: #3d7f9c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.menu-item svg {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.menu-item span {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-item:hover span {
+  color: #0056b3;
+  transform: translateX(5px);
+}
+
+.menu-item:active {
+  transform: translateX(10px);
+}
+
+
+/** Screen width below 600px **/
+@media screen and (width < 600px) {
+  .userProfileCard {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .user-name {
+    display: none;
+  }
+  .profile-image {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 6px 12px !important;
+  }
+  .menu-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .menu-item {
+    flex-direction: column;
+    margin: 0;
+  }
+  .menu-item svg {
+    margin: 0;
+    font-size: 16px;
+  }
+  .menu-item span {
+    font-size: 10px;
+  }
+}
+
+
+/** Screen width below 450px **/
+@media screen and (width < 450px) {
+  .menu-list {
+    padding: 0 12px;
+  }
+  .menu-item svg {
+    margin: 0;
+  }
+  .menu-item span {
+    font-size: 6px;
+  }
+}
