@@ -3,16 +3,18 @@
 import "@/styles/app/viewproduct/shop.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { ImPower } from "react-icons/im";
-import { lazy, useContext, useEffect, useState, Suspense } from "react"; // Import Suspense here
+import { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { AppContext } from "@/components/context/WrapperContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { apis } from "@/lib/constants";
 
-// Lazy load the ViewProductImage component
-const LazyViewProductImage = lazy(() => import("@/page/viewproduct/ViewProductImage"), {
-  ssr: false,
-});
+const LazyViewProductImage = lazy(
+  () => import("@/page/viewproduct/ViewProductImage"),
+  {
+    ssr: false,
+  }
+);
 
 export default function ViewProduct() {
   const GlobalContext = useContext(AppContext);
@@ -105,21 +107,20 @@ export default function ViewProduct() {
   }
 
   return (
-    <div className="shop">
+    <Suspense fallback={<div>View Product page is loading...</div>}>
+      <div className="shop">
       {/* <ProductFilter /> */}
       <div className="product_shopping_page">
         <div className="product-details-container">
           <div className="product_image_add_to_cart">
             <div className="product-image">
-              <Suspense fallback={<div>Loading image...</div>}>
-                <LazyViewProductImage
-                  imgUrl={viewPageItem?.imageurl}
-                  imgH={400}
-                  imgW={400}
-                  skelH={300}
-                  skelW={400}
-                />
-              </Suspense>
+              <LazyViewProductImage
+                imgUrl={viewPageItem?.imageurl}
+                imgH={400}
+                imgW={400}
+                skelH={300}
+                skelW={400}
+              />
             </div>
             <div className="buy_now_add_to_cart_cont">
               <button className="page_button_outline flexbox">
@@ -186,15 +187,13 @@ export default function ViewProduct() {
               {Array.from({ length: 3 }).map((_, ind) => {
                 return (
                   <div key={ind} className="p-3">
-                    <Suspense fallback={<div>Loading thumbnail...</div>}>
-                      <LazyViewProductImage
-                        imgUrl={viewPageItem?.imageurl}
-                        imgH={100}
-                        imgW={100}
-                        skelH={100}
-                        skelW={100}
-                      />
-                    </Suspense>
+                    <LazyViewProductImage
+                      imgUrl={viewPageItem?.imageurl}
+                      imgH={100}
+                      imgW={100}
+                      skelH={100}
+                      skelW={100}
+                    />
                   </div>
                 );
               })}
@@ -223,5 +222,6 @@ export default function ViewProduct() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
