@@ -4,10 +4,12 @@ import NoResultPage from "@/components/NoResultPage/NoResultPage";
 import { Grid, Skeleton } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ProductFilter from "./productfilter/productfilter";
 import FilterOption from "./FilterOption";
 import { setProductList } from "@/react-redux/slices/products/productSlice";
+import axios from "axios";
+import { apis } from "@/lib/constants";
 
 const LazyProductItem = dynamic(
   () => import("@/page/product/itemcart/productitem"),
@@ -27,28 +29,39 @@ const LazyProductItem = dynamic(
   }
 );
 
-const ProductPage = ({productList}) => {
+const ProductPage = () => {
   console.log("This is product page.............");
-  // const productList = useSelector((state) => state?.product?.productList);
   const dispatch = useDispatch();
 
-  const [products, setProducts] = useState(productList);
+  const [products, setProducts] = useState([]);
   const [inputText, setInputText] = useState("");
 
-  console.log("productList", productList)
-
   useEffect(() => {
-    if(productList) {
-      // setProducts(productList);
-      dispatch(setProductList(productList));
+    (async () => {
+      const products = await getProducts();
+      setProducts(products);
+
+      if(products) {
+        dispatch(setProductList(products));
+      }
+    })()
+  }, [])
+
+  async function getProducts() {
+    try {
+      const products = await axios.get(apis.SERVER_BASE_URL + "api/products");
+      return products.data;
+    } catch(error) {
+      console.error("Error fetching products:", error);
+      return [];
     }
-  }, [productList]);
+  }
 
   const handleInputChange = (e) => {
     const inputVal = e.target.value;
     const inputValLow = e.target.value?.toLowerCase();
 
-    const filteredProd = productList?.filter((el) => {
+    const filteredProd = products?.filter((el) => {
       if (
         el?.color?.toLowerCase()?.includes(inputValLow) ||
         el?.gender?.toLowerCase()?.includes(inputValLow) ||
@@ -65,11 +78,11 @@ const ProductPage = ({productList}) => {
 
   const handleEraseInput = () => {
     setInputText("");
-    setProducts(productList);
+    setProducts(products);
   };
 
   const handleFilter = (val) => {
-    const filteredProd = productList?.filter((el) => {
+    const filteredProd = products?.filter((el) => {
       if (el?.type?.toLowerCase()?.includes(val)) {
         return el;
       }
@@ -78,7 +91,7 @@ const ProductPage = ({productList}) => {
   };
 
   const handleFilterByGender = (val) => {
-    const filteredProd = productList?.filter((el) => {
+    const filteredProd = products?.filter((el) => {
       if (el?.gender?.toLowerCase()?.includes(val)) {
         return el;
       }
