@@ -59,7 +59,7 @@ function Cart() {
     Promise.all(userCart?.map(async (el) => {
       try {
         const productItem = await axios.post(apis.SERVER_BASE_URL + "api/products", {productId: el?.product_id});
-        console.log("productItem", productItem)
+        // console.log("productItem", productItem)
         
         return {...productItem.data, quantity: el?.product_quantity, size: el?.product_size};
       } catch(error) {

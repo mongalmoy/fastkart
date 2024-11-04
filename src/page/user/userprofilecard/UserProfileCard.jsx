@@ -35,7 +35,7 @@ const UserProfileCard = () => {
       <ul className="menu-list">
         {menuList.map((el, ind) => {
           if(el.name?.toLocaleLowerCase()==="logout"){
-            return <LogoutButton el={el} ind={ind} />
+            return <LogoutButton key={ind} el={el} ind={ind} />
           }
           return (
             <Link

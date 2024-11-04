@@ -12,7 +12,6 @@ const MyAccount = () => {
     (async () => {
       try {
         const userRes = await axios.get(apis.SERVER_BASE_URL + "api/user");
-        console.log("userRes", userRes);
         if (userRes.status === 200) {
           setUserInfo(userRes.data);
         }

@@ -1,7 +1,10 @@
+"use client";
+
 import { apis } from "@/lib/constants";
 import { Grid, Skeleton } from "@mui/material";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const LazyProductItem = dynamic(
   () => import("@/page/product/itemcart/productitem"),
@@ -21,20 +24,30 @@ const LazyProductItem = dynamic(
   }
 );
 
-async function getProducts() {
-  try {
-    const products = await axios.get(apis.SERVER_BASE_URL + "api/products");
 
-    return products.data;
-  } catch(error) {
-    console.log(error)
-    return [];
-  }
-}
 
-const HomepageProducts = async () => {
-  const products = await getProducts();
+const HomepageProducts = () => {
   console.log("This is Homepage Product page................");
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const products = await getProducts();
+      setProducts(products)
+    })()
+  })
+
+  async function getProducts() {
+    try {
+      const products = await axios.get(apis.SERVER_BASE_URL + "api/products");
+  
+      return products.data;
+    } catch(error) {
+      console.log(error)
+      return [];
+    }
+  }
 
   return (
     <Grid container spacing={3} className="product_items_container mt-5">

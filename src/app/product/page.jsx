@@ -17,7 +17,7 @@ const LazyProductPage = dynamic(() => import("@/page/product/ProductPage"),{
 async function getProducts() {
   try {
     const products = await axios.get(apis.SERVER_BASE_URL + "api/products");
-    console.log("productsListUi------>", products)
+    // console.log("productsListUi------>", products)
     return products.data;
   } catch(error) {
     console.error("Error fetching products:", error);

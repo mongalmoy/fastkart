@@ -26,7 +26,6 @@ const EditAccount = () => {
   useEffect(() => {
     (async () => {
       const userRes = await axios.get(apis.SERVER_BASE_URL + "api/user");
-      console.log("userRes", userRes);
       if (userRes.status === 200) {
         setUserInfo((prev) => {
           return {
@@ -45,12 +44,6 @@ const EditAccount = () => {
       }
     })();
   }, []);
-
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-  }
 
   const changeInput = (e) => {
     const { name, value } = e.target;
