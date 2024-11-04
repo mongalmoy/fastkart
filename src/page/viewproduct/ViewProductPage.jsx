@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ImPower } from "react-icons/im";
 import { FaShoppingCart } from "react-icons/fa";
+import { AppContext } from "@/components/context/WrapperContext";
 
 const LazyViewProductImage = lazy(
   () => import("@/page/viewproduct/ViewProductImage"),
