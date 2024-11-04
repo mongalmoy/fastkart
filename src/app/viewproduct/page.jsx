@@ -41,10 +41,10 @@ export default function ViewProduct() {
   ).toFixed(2);
 
   useEffect(() => {
-    if (productId) fetchData();
+    if (productId) fetchData(productId);
   }, [productId]);
 
-  const fetchData = async () => {
+  const fetchData = async (productId) => {
     try {
       const productItemRes = await axios.post(
         `${apis.SERVER_BASE_URL}api/products`,
