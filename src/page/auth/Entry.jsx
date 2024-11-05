@@ -54,6 +54,7 @@ const Entry = ({ isLogin }) => {
       }
 
     } catch(error) {
+      setLoading(false);
       console.log(error)
       toast.error("Something went wrong")
     }
@@ -75,7 +76,9 @@ const Entry = ({ isLogin }) => {
 
         localStorage.setItem("userId", response.data?.user?.id)
 
-        router.push("/")
+        setTimeout(()=> {
+          router.replace("/")
+        }, 100)
       } else {
         toast?.error(response.data?.message)
       }
