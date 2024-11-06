@@ -2,16 +2,21 @@
 
 import { AppContext } from "@/components/context/WrapperContext";
 import { apis } from "@/lib/constants";
+import { setUserInfo } from "@/react-redux/slices/users/userSlice";
 import "@/styles/app/my-account/edit/style.css";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const EditAccount = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const GlobalContext = useContext(AppContext);
 
   const toast = GlobalContext?.toast;
 
-  const [userInfo, setUserInfo] = useState({
+  const [userDetails, setUserDetails] = useState({
     name: "",
     dob: "",
     email: "",
@@ -21,13 +26,13 @@ const EditAccount = () => {
     address: "",
   });
 
-  console.log("userInfo", userInfo)
+  console.log("userDetails", userDetails)
 
   useEffect(() => {
     (async () => {
       const userRes = await axios.get(apis.SERVER_BASE_URL + "api/user");
       if (userRes.status === 200) {
-        setUserInfo((prev) => {
+        setUserDetails((prev) => {
           return {
             ...prev,
             name: userRes.data?.name,
@@ -47,7 +52,7 @@ const EditAccount = () => {
 
   const changeInput = (e) => {
     const { name, value } = e.target;
-    setUserInfo((prev) => ({ ...prev, [name]: value }));
+    setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -56,17 +61,17 @@ const EditAccount = () => {
     try {
       const updateRes = await axios.patch(
         apis.SERVER_BASE_URL + "api/user",
-        userInfo
+        userDetails
       );
 
       if (updateRes.status === 200) {
         toast.success(updateRes.data?.message);
+        dispatch(setUserInfo(updateRes.data?.user))
+        router.push("/my-account");
       }
     } catch(error) {
       toast.error(error?.response?.data?.message);
-
     }
-
   };
 
   return (
@@ -82,7 +87,7 @@ const EditAccount = () => {
             className="form-input"
             placeholder="Enter your name"
             onChange={changeInput}
-            value={userInfo.name || ""}
+            value={userDetails.name || ""}
           />
         </div>
         <div className="form-group">
@@ -93,7 +98,7 @@ const EditAccount = () => {
             name="dob"
             className="form-input"
             onChange={changeInput}
-            value={userInfo.dob || ""}
+            value={userDetails.dob || ""}
           />
         </div>
         <div className="form-group">
@@ -105,7 +110,7 @@ const EditAccount = () => {
             className="form-input"
             placeholder="Enter your email"
             disabled
-            value={userInfo.email || ""}
+            value={userDetails.email || ""}
             onChange={changeInput}
           />
         </div>
@@ -118,7 +123,7 @@ const EditAccount = () => {
             className="form-input"
             placeholder="Enter your country"
             onChange={changeInput}
-            value={userInfo.country || ""}
+            value={userDetails.country || ""}
           />
         </div>
         <div className="form-group">
@@ -130,7 +135,7 @@ const EditAccount = () => {
             className="form-input"
             placeholder="Enter your city"
             onChange={changeInput}
-            value={userInfo.city || ""}
+            value={userDetails.city || ""}
           />
         </div>
         <div className="form-group">
@@ -142,7 +147,7 @@ const EditAccount = () => {
             className="form-input"
             placeholder="Enter your contact number"
             onChange={changeInput}
-            value={userInfo.contact || ""}
+            value={userDetails.contact || ""}
           />
         </div>
         <div className="form-group">
@@ -153,7 +158,7 @@ const EditAccount = () => {
             className="form-input"
             placeholder="Enter your address"
             onChange={changeInput}
-            value={userInfo.address || ""}
+            value={userDetails.address || ""}
           ></textarea>
         </div>
         <button type="submit" className="form-button">
