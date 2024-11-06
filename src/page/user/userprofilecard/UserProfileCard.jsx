@@ -9,6 +9,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { MdAutoDelete } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import LogoutButton from "./LogoutButton";
+import ProfileImageName from "./ProfileImageName";
 
 const menuList = [
   { icon: <AiOutlineBars />, name: "My Orders", href: "orders" },
@@ -23,15 +24,8 @@ const UserProfileCard = () => {
 
   return (
     <div className="card-container userProfileCard">
-      <Image
-        src={"/assets/img/user/user_photo.jpg"} // Replace with your image URL
-        alt="User Profile"
-        className="profile-image"
-        height={100}
-        width={100}
-        loading="lazy"
-      />
-      <h2 className="user-name">Mongalmoy Karmakar</h2>
+      <ProfileImageName />
+      
       <ul className="menu-list">
         {menuList.map((el, ind) => {
           if(el.name?.toLocaleLowerCase()==="logout"){

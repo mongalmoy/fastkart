@@ -1,16 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
-const HeaderCartIcon = (el) => {
+const HeaderCartIcon = ({el}) => {
   const count = useSelector((state) => state?.cart?.cartCount);
   return (
-    <button className={el?.className}>
-      {el?.icon}
-      <span>
-        {el?.name==="cart" ? count : el?.name}
-      </span>
-    </button>
+    <Link
+      href={el.link}
+      className={el.className + "_a"}
+    >
+      <button className={el?.className}>
+        {el?.icon}
+        <span>{count}</span>
+      </button>
+    </Link>
   );
 };
 

@@ -36,7 +36,7 @@ const HomepageProducts = () => {
       const products = await getProducts();
       setProducts(products)
     })()
-  })
+  }, [])
 
   async function getProducts() {
     try {

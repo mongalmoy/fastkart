@@ -4,7 +4,7 @@ import HomepageCard from "@/components/homepagecard/homepagecard";
 import { homepagecard } from "@/data/homepagedata/homepagedata";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import HomepageProducts from "./HomepageProducts";
-import IsUserAuthentic from "@/utils/isUserAuthentic";
+// import IsUserAuthentic from "@/utils/isUserAuthentic";
 
 const HomePage = () => {
   return (
@@ -52,7 +52,7 @@ const HomePage = () => {
 
       <HomepageProducts />
     </div>
-    <IsUserAuthentic />
+    {/* <IsUserAuthentic /> */}
     </>
   );
 };
