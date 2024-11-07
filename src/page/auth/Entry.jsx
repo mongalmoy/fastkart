@@ -18,17 +18,26 @@ const Entry = ({ isLogin }) => {
     name: "",
     email: "",
     password: "",
-  })
+  });
+  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      router.replace("/");
+    if (typeof window !== "undefined") {
+      const localUserId = localStorage.getItem("userId");
+      if (localUserId) {
+        setUserId(localUserId);
+      }
     }
-  }, [router, localStorage.getItem("userId")]);
+  }, []);
 
-
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (userId) {
+        router.replace("/");
+      }
+    }
+  }, [router, userId]);
 
   const redirectPage = () => {
     router.push(isLogin ? "/register" : "/login", undefined, { shallow: true });
@@ -36,40 +45,36 @@ const Entry = ({ isLogin }) => {
 
   const handleInputChange = (e) => {
     e.preventDefault();
-    const {name, value} = e.target;
-    setUserInfo(prev => {
-      return {...prev, [name]:value};
-    })
-  }
+    const { name, value } = e.target;
+    setUserInfo((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
 
   // Register Submit
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post("api/auth/register", userInfo)
+      const response = await axios.post("api/auth/register", userInfo);
       setLoading(false);
 
       // console.log("response", response)
 
-      if(response.status===201) {
-        toast?.success(response.data?.message)
+      if (response.status === 201) {
+        toast?.success(response.data?.message);
 
-        localStorage.setItem("userId", response.data?.user?.id)
-
-        // setTimeout(()=> {
-        //   router.replace("/")
-        // }, 200)
+        setUserId(response.data?.user?.id);
+        localStorage.setItem("userId", response.data?.user?.id);
       } else {
-        toast?.error(response.data?.message)
+        toast?.error(response.data?.message);
       }
-
-    } catch(error) {
+    } catch (error) {
       setLoading(false);
-      console.log(error)
-      toast.error("Something went wrong")
+      console.log(error);
+      toast.error("Something went wrong");
     }
-  }
+  };
 
   // Login Submit
   const handleLoginSubmit = async (e) => {
@@ -77,35 +82,34 @@ const Entry = ({ isLogin }) => {
 
     try {
       setLoading(true);
-      const response = await axios.post("api/auth/login", userInfo)
+      const response = await axios.post("api/auth/login", userInfo);
       setLoading(false);
 
       // console.log("response", response)
 
-      if(response.status===200) {
-        toast?.success(response.data?.message)
+      if (response.status === 200) {
+        toast?.success(response.data?.message);
 
-        localStorage.setItem("userId", response.data?.user?.id)
-        // console.log("localstorage setItem called..............")
-        // setTimeout(()=> {
-        //   router.replace("/")
-        // }, 200)
+        setUserId(response.data?.user?.id);
+        localStorage.setItem("userId", response.data?.user?.id);
       } else {
-        toast?.error(response.data?.message)
+        toast?.error(response.data?.message);
       }
-
-    } catch(error) {
-      console.log(error)
-      setLoading(false)
-      toast.error(error.response?.data?.message)
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error(error.response?.data?.message);
     }
-  }
+  };
 
-  console.log("Entry page")
+  console.log("Entry page");
 
   return (
     <div className={styles.outerContainer}>
-      <form className={styles.container} onSubmit={isLogin ? handleLoginSubmit : handleRegisterSubmit}>
+      <form
+        className={styles.container}
+        onSubmit={isLogin ? handleLoginSubmit : handleRegisterSubmit}
+      >
         <div
           className={
             isLogin
@@ -162,10 +166,18 @@ const Entry = ({ isLogin }) => {
           <p className={styles.forgotPassword}>
             {/* Forgot Your Password? */}
             {isLogin ? "Don't have an account?" : "Already have an account?"}
-            <b className="underline ms-1 cursor-pointer" onClick={redirectPage}>{isLogin ? "Register" : "Login"}</b>
+            <b className="underline ms-1 cursor-pointer" onClick={redirectPage}>
+              {isLogin ? "Register" : "Login"}
+            </b>
           </p>
           <button className={styles.signInButton} type="submit">
-            {loading && <CircularProgress size={20} className="me-2" style={{color:"#fff"}} />}
+            {loading && (
+              <CircularProgress
+                size={20}
+                className="me-2"
+                style={{ color: "#fff" }}
+              />
+            )}
             {loading ? "Fetching..." : isLogin ? "SIGN IN" : "SIGN UP"}
           </button>
         </div>
