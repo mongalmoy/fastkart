@@ -3,7 +3,7 @@
 import styles from "@/styles/page/auth/Entry.module.css";
 import { FaFacebook, FaGoogle, FaLinkedin, FaPinterest } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AppContext } from "@/components/context/WrapperContext";
 import { CircularProgress } from "@mui/material";
@@ -20,6 +20,15 @@ const Entry = ({ isLogin }) => {
     password: "",
   })
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      router.replace("/");
+    }
+  }, [router, localStorage.getItem("userId")]);
+
+
 
   const redirectPage = () => {
     router.push(isLogin ? "/register" : "/login", undefined, { shallow: true });
@@ -48,9 +57,9 @@ const Entry = ({ isLogin }) => {
 
         localStorage.setItem("userId", response.data?.user?.id)
 
-        setTimeout(()=> {
-          router.replace("/")
-        }, 200)
+        // setTimeout(()=> {
+        //   router.replace("/")
+        // }, 200)
       } else {
         toast?.error(response.data?.message)
       }
@@ -78,9 +87,9 @@ const Entry = ({ isLogin }) => {
 
         localStorage.setItem("userId", response.data?.user?.id)
         // console.log("localstorage setItem called..............")
-        setTimeout(()=> {
-          router.replace("/")
-        }, 200)
+        // setTimeout(()=> {
+        //   router.replace("/")
+        // }, 200)
       } else {
         toast?.error(response.data?.message)
       }
