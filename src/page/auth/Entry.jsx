@@ -41,14 +41,16 @@ const Entry = ({ isLogin }) => {
       const response = await axios.post("api/auth/register", userInfo)
       setLoading(false);
 
-      console.log("response", response)
+      // console.log("response", response)
 
       if(response.status===201) {
         toast?.success(response.data?.message)
 
         localStorage.setItem("userId", response.data?.user?.id)
 
-        router.push("/")
+        setTimeout(()=> {
+          router.replace("/")
+        }, 200)
       } else {
         toast?.error(response.data?.message)
       }
@@ -69,16 +71,16 @@ const Entry = ({ isLogin }) => {
       const response = await axios.post("api/auth/login", userInfo)
       setLoading(false);
 
-      console.log("response", response)
+      // console.log("response", response)
 
       if(response.status===200) {
         toast?.success(response.data?.message)
 
         localStorage.setItem("userId", response.data?.user?.id)
-
+        // console.log("localstorage setItem called..............")
         setTimeout(()=> {
           router.replace("/")
-        }, 100)
+        }, 200)
       } else {
         toast?.error(response.data?.message)
       }
