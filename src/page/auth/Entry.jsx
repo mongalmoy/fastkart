@@ -7,37 +7,22 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AppContext } from "@/components/context/WrapperContext";
 import { CircularProgress } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setUserId } from "@/react-redux/slices/users/userSlice";
 
 const Entry = ({ isLogin }) => {
   const GlobalContext = useContext(AppContext);
   const toast = GlobalContext?.toast;
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const localUserId = localStorage.getItem("userId");
-      if (localUserId) {
-        setUserId(localUserId);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (userId) {
-        router.replace("/");
-      }
-    }
-  }, [router, userId]);
 
   const redirectPage = () => {
     router.push(isLogin ? "/register" : "/login", undefined, { shallow: true });
@@ -64,8 +49,12 @@ const Entry = ({ isLogin }) => {
       if (response.status === 201) {
         toast?.success(response.data?.message);
 
-        setUserId(response.data?.user?.id);
-        localStorage.setItem("userId", response.data?.user?.id);
+        dispatch(setUserId(response.data?.user?.id));
+
+        // redirecting to homepage
+        setTimeout(() => {
+          router.push("/")
+        }, 100)
       } else {
         toast?.error(response.data?.message);
       }
@@ -89,9 +78,12 @@ const Entry = ({ isLogin }) => {
 
       if (response.status === 200) {
         toast?.success(response.data?.message);
-
-        setUserId(response.data?.user?.id);
-        localStorage.setItem("userId", response.data?.user?.id);
+        
+        dispatch(setUserId(response.data?.user?.id));
+        // redirecting to homepage
+        setTimeout(() => {
+          router.push("/")
+        }, 100)
       } else {
         toast?.error(response.data?.message);
       }
