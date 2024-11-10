@@ -9,8 +9,12 @@
 .product_price {
   font-size: 18px;
 }
+.product_size_and_gender {
+  /* display: flex; */
+}
 .product_size {
   font-size: 16px;
+  display: flex;
 }
 .product_name_price_container {
   flex-direction: row;

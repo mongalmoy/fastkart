@@ -1,7 +1,6 @@
 .product_page {
   padding: 12px 30px;
   margin: 20px 0;
-  
 }
 .product_page_inner {
   display: flex;
@@ -14,6 +13,18 @@
 }
 .filter_options {
   display: none;
+}
+.filter_close_btn {
+  color: red;
+  font-size: 16px;
+  margin-top: 2px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+.filter_close_btn:hover {
+  background: #e3e3e3;
+  border-radius: 50%;
+  padding: 1px;
 }
 
 /** Screen width below 600px **/

@@ -34,25 +34,27 @@ import axios from "axios";
 import { apis } from "@/lib/constants";
 // import { Popconfirm } from "antd";
 
-const ShoppingCart = ({cartList=[], userCart=[], setCartList, cartListRef, onLoad}) => {
+const ShoppingCart = ({
+  cartList = [],
+  userCart = [],
+  setCartList,
+  cartListRef,
+  onLoad,
+}) => {
   const GlobalContext = useContext(AppContext);
-
 
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const action = GlobalContext?.action;
-  const toast = GlobalContext?.toast;
+  // const action = GlobalContext?.action;
+  const { toast, loader, loading } = GlobalContext;
 
   // const cartList = useSelector((state) => state?.cart?.cartList);
 
   // /********************** useState starts***************************/
   const [showDelBtn, setShowDelBtn] = useState(false);
 
-  
   // /********************** useState ends ***************************/
-
-
 
   // console.log(cartListRef.current);
 
@@ -63,42 +65,56 @@ const ShoppingCart = ({cartList=[], userCart=[], setCartList, cartListRef, onLoa
 
   async function handleManageItemToCart(condition, item) {
     try {
-      const updateCartRes = await axios.post(apis.SERVER_BASE_URL + "api/cart", 
+      loading(true);
+      const updateCartRes = await axios.post(
+        apis.SERVER_BASE_URL + "api/cart",
         {
           ...item,
           productId: item?.id,
           quantity: 1,
-          condition: condition
+          condition: condition,
         }
       );
-      toast?.success(updateCartRes.data?.message);
-      await onLoad();
-    } catch(error) {
-      console.log(error)
-      toast?.error(error.response?.data?.message)
-      if(error.status===401) {
-        router.push("/login")
+      loading(false);
+
+      if (updateCartRes.status === 200) {
+        toast?.success(updateCartRes.data?.message);
+        await onLoad();
+      }
+    } catch (error) {
+      console.log(error);
+      loading(false);
+      toast?.error(error.response?.data?.message);
+      if (error.status === 401) {
+        router.push("/login");
       }
     }
   }
 
   const deleteCartItems = async () => {
     try {
+      loading(true);
       const deleteRes = await axios.delete(apis.SERVER_BASE_URL + "api/cart", {
-        data: cartListRef.current?.filter(el => el?.isChecked)
-      })
+        data: cartListRef.current?.filter((el) => el?.isChecked),
+      });
+      loading(false);
 
-      toast?.success(deleteRes?.data?.message)
-      await onLoad();
-    } catch(error) {
+      if (deleteRes.status === 200) {
+        toast?.success(deleteRes?.data?.message);
+        await onLoad();
+      }
+    } catch (error) {
       console.log(error);
-      toast?.error(error.response?.data?.message)
+      loading(false);
+      toast?.error(error.response?.data?.message);
     }
   };
 
   const handleChangeInput = (itemId, size) => {
     cartListRef.current?.forEach((el) =>
-      el?.product_id === itemId && el?.product_size===size ? (el.isChecked = !el?.isChecked) : null
+      el?.product_id === itemId && el?.product_size === size
+        ? (el.isChecked = !el?.isChecked)
+        : null
     );
 
     setShowDelBtn(
@@ -144,9 +160,7 @@ const ShoppingCart = ({cartList=[], userCart=[], setCartList, cartListRef, onLoa
           ) : null}
 
           {showDelBtn ? (
-            <Tooltip title="Delete" 
-              onClick={deleteCartItems}
-            >
+            <Tooltip title="Delete" onClick={deleteCartItems}>
               <IconButton>
                 <DeleteIcon />
               </IconButton>
@@ -180,7 +194,6 @@ const ShoppingCart = ({cartList=[], userCart=[], setCartList, cartListRef, onLoa
               <TableCell align="left" className="ps-0">
                 Total Price
               </TableCell>
-              
             </TableRow>
           </TableHead>
           <TableBody className="shopping_cart_tbody">
@@ -214,7 +227,15 @@ const ShoppingCart = ({cartList=[], userCart=[], setCartList, cartListRef, onLoa
                     />
                   </TableCell>
                   <TableCell align="left">{el?.name}</TableCell>
-                  <TableCell align="left">{el?.size==="M" ? "Medium" : el?.size==="S" ? "Small" : el?.size==="L" ? "Large" : "Extra Large"}</TableCell>
+                  <TableCell align="left">
+                    {el?.size === "M"
+                      ? "Medium"
+                      : el?.size === "S"
+                      ? "Small"
+                      : el?.size === "L"
+                      ? "Large"
+                      : "Extra Large"}
+                  </TableCell>
                   <TableCell align="left">
                     <div className="flexbox">
                       <a
@@ -232,7 +253,7 @@ const ShoppingCart = ({cartList=[], userCart=[], setCartList, cartListRef, onLoa
                       <span className="mx-3">{el?.quantity}</span>
                       <a
                         className="plus_minus_icon_holder"
-                        onClick={async() => {
+                        onClick={async () => {
                           // dispatch(
                           //   addItemToCart({
                           //     item: el,

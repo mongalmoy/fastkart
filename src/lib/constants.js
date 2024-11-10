@@ -8,6 +8,9 @@ export const db_tables = {
   },
   user_cart: {
     name: "user_cart",
+  },
+  orders: {
+    name: "orders"
   }
 }
 

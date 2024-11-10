@@ -10,14 +10,16 @@ const ProductFilter = ({
   handleFilter,
   handleFilterByGender,
 }) => {
-  const { productCategories, categories } = productFilter;
+  const { productCategories, categories, filterCategories=[] } = productFilter;
 
   return (
-    <div className="product_category">
+    <>
       <div className="input_text">
-        {inputText && <div className="cross_cont" onClick={handleEraseInput}>
-          <RxCross2 />
-        </div>}
+        {inputText && (
+          <div className="cross_cont" onClick={handleEraseInput}>
+            <RxCross2 />
+          </div>
+        )}
         <div className="search_icon_cont">
           <CiSearch />
         </div>
@@ -31,8 +33,11 @@ const ProductFilter = ({
         <h3 className="category-title">Products Categories</h3>
         <ul className="category-list">
           {productCategories.map((el) => (
-            <li key={el.toString() + Math.random()}>
-              <b onClick={() => handleFilter(el.value)}>{el.name}</b>
+            <li
+              key={el.toString() + Math.random()}
+              onClick={() => handleFilter(el.value)}
+            >
+              <b>{el.name}</b>
             </li>
           ))}
         </ul>
@@ -41,13 +46,16 @@ const ProductFilter = ({
         <h3 className="category-title">Categories</h3>
         <ul className="category-list">
           {categories.map((el) => (
-            <li key={el.toString() + Math.random()}>
-              <b onClick={() => handleFilterByGender(el.value)}>{el.name}</b>
+            <li
+              key={el.toString() + Math.random()}
+              onClick={() => handleFilterByGender(el.value)}
+            >
+              <b>{el.name}</b>
             </li>
           ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 };
 

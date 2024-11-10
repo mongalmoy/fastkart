@@ -9,9 +9,10 @@ import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { apis } from "@/lib/constants";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCartCount } from "@/react-redux/slices/carts/cartSlice";
+import { AppContext } from "@/components/context/WrapperContext";
 
 export async function getCartList() {
   console.log("getcartlist");
@@ -30,9 +31,11 @@ export async function getCartList() {
 function Cart() {
   const dispatch = useDispatch();
 
+  const {toast, loader, loading} = useContext(AppContext)
+
   const [userCart, setUserCart] = useState([])
   const [cartList, setCartList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loader, loading] = useState(false);
 
 
   /********************** useRef starts***************************/
@@ -48,7 +51,7 @@ function Cart() {
   }, []);
 
   const onLoad = async () => {
-    setLoading(true)
+    loading(true)
     const userCart = await getCartList()
 
     console.log("userCart--->", userCart)
@@ -70,14 +73,16 @@ function Cart() {
       const totalCnt = data?.reduce((tot, el) => tot += el?.quantity, 0)
       dispatch(setCartCount(totalCnt))
       setCartList(data);
-      setLoading(false)
+      loading(false)
+    }).finally(() => {
+      loading(false)
     })
   }
 
   
   return (
     <div className="cart">
-      {cartList?.length === 0 && loading===false ? (
+      {cartList?.length === 0 && loader===false ? (
         <div>
           <Alert severity="warning" className="cart_empty_alert mb-5">
             <AlertTitle>Your basket is empty</AlertTitle>

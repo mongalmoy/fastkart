@@ -15,34 +15,40 @@ import { apis } from "@/lib/constants";
 
 const ProductItem = (props) => {
   const GlobalContext = useContext(AppContext);
-  const toast = GlobalContext?.toast;
+  const { toast, loading } = GlobalContext;
 
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [size, setSize] = useState("S")
+  const [size, setSize] = useState("S");
 
   const handleAddToCart = async () => {
     try {
-      const updateCartRes = await axios.post(apis.SERVER_BASE_URL + "api/cart", 
+      loading(true);
+      const updateCartRes = await axios.post(
+        apis.SERVER_BASE_URL + "api/cart",
         {
           ...props?.item,
           productId: props?.item?.id,
           quantity: 1,
           size: size,
-          condition: "add"
+          condition: "add",
         }
       );
-      toast?.success(updateCartRes.data?.message);
-      router.push("/cart");
-    } catch(error) {
-      console.log(error)
-      toast?.error(error.response?.data?.message)
-      if(error.status===401) {
-        router.push("/login")
+      loading(false);
+
+      if (updateCartRes.status === 200) {
+        toast?.success(updateCartRes.data?.message);
+        router.push("/cart");
+      }
+    } catch (error) {
+      console.log(error);
+      toast?.error(error.response?.data?.message);
+      if (error.status === 401) {
+        router.push("/login");
       }
     }
-  }
+  };
 
   return (
     <Card sx={{ maxWidth: 345 }} className="product_item py-2">
@@ -50,8 +56,16 @@ const ProductItem = (props) => {
         src={props?.item?.imageurl}
         alt={props?.item?.name}
         className="product_image"
+        style={{ cursor: "pointer" }}
         width={120}
         height={140}
+        onClick={() => {
+          loading(true);
+          dispatch(setViewPageItem(props?.item));
+          loading(false);
+          router.push(`/viewproduct?id=${props?.item?.id}`);
+        }}
+
         // priority
       />
       <CardContent className="product_name_price_container py-1 flex justify-between">
@@ -73,21 +87,33 @@ const ProductItem = (props) => {
             ₹ {props?.item?.price}
           </Typography>
         </div>
-        <div className="product_size">
-          <Typography variant="p">Size</Typography>
-          <select name="size" id="size" value={size} onChange={(e) => setSize(e.target.value)}>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
+        <div className="product_size_and_gender">
+          <div className="product_size">
+            <Typography variant="p">Size</Typography>
+            <select
+              name="size"
+              id="size"
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+            >
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+          <div className="product_size">
+            <Typography variant="p">{props?.item?.gender}</Typography>
+          </div>
         </div>
       </CardContent>
       <CardActions className="product_item_footer_buttons">
         <button
           className="page_button_outline"
           onClick={() => {
+            loading(true);
             dispatch(setViewPageItem(props?.item));
+            loading(false);
             router.push(`/viewproduct?id=${props?.item?.id}`);
           }}
         >
@@ -95,7 +121,7 @@ const ProductItem = (props) => {
         </button>
         <button
           className="page_button flexbox"
-          onClick={async() => {
+          onClick={async () => {
             await handleAddToCart();
           }}
         >
