@@ -13,7 +13,7 @@ export async function middleware(request) {
     await jwtVerify(
       token,
       new TextEncoder().encode(process.env.JWT_SIGN_PRIVATE_KEY)
-    )
+    );
   } catch (error) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -24,5 +24,14 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/", "/product", "/cart", "/my-account", "/my-account/edit", "/my-account/change-password", "/my-account/delete"],
+  matcher: [
+    "/",
+    "/product",
+    "/cart",
+    "/my-account",
+    "/my-account/edit",
+    "/my-account/change-password",
+    "/my-account/delete",
+    "/checkout",
+  ],
 };

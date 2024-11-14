@@ -11,6 +11,15 @@ export const db_tables = {
   },
   orders: {
     name: "orders"
+  },
+  orders_desc: {
+    name: "order_desc_tx"
+  },
+  delivery_address: {
+    name: "delivery_address_tx"
+  },
+  payment_address: {
+    name: "payment_address_tx"
   }
 }
 

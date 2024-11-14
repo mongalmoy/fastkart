@@ -1,0 +1,271 @@
+/* Main Checkout Page Styles */
+.checkout-page {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  background-color: #f5f7fa;
+  font-family: Arial, sans-serif;
+}
+
+.checkout-container {
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.checkout-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Cart Item Section */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-details {
+  display: flex;
+  align-items: center;
+}
+
+.item-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.item-size {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.item-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.item-quantity,
+.item-total {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.item-total {
+  font-weight: bold;
+  color: #1a73e8;
+}
+
+
+/* Billing and Order Summary Sections */
+.checkout-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.billing-address,
+.order-summary {
+  flex: 1;
+  background-color: #f9fafb;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.billing-title,
+.summary-title {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.billing-form .form-group,
+.form-group-inline .form-group {
+  margin-bottom: 10px;
+}
+
+.form-group-inline {
+  display: flex;
+  gap: 10px;
+}
+.form-group-inline div {
+  width: calc(100% - 5px);
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.form-group input:focus {
+  border-color: #1a73e8;
+  outline: none;
+  box-shadow: 0 0 5px rgba(26, 115, 232, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Validation Error Styles */
+.form-group.error input {
+  border-color: #e53935;
+  box-shadow: 0 0 5px rgba(229, 57, 53, 0.5);
+}
+
+.form-group .error-msg {
+  color: #e53935;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* Card Details Title */
+.card-details-title {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Order Summary Details */
+.summary-details {
+  margin-top: 15px;
+}
+
+.summary-item,
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.summary-item span,
+.summary-total span {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.summary-total span {
+  font-weight: bold;
+  color: #1a73e8;
+}
+
+/* Checkout Button */
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #155bb5;
+  transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .checkout-sections {
+    flex-direction: column;
+  }
+
+  .checkout-title {
+    font-size: 1.5rem;
+  }
+
+  .billing-title,
+  .summary-title {
+    font-size: 1.2rem;
+  }
+
+  .summary-item span,
+  .summary-total span,
+  .item-name,
+  .item-quantity,
+  .item-total {
+    font-size: 0.85rem;
+  }
+
+  .checkout-btn {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .checkout-page {
+    padding-bottom: 70px;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout-container {
+    padding: 15px;
+  }
+
+  .checkout-title {
+    font-size: 1.4rem;
+  }
+
+  .billing-title,
+  .summary-title {
+    font-size: 1.1rem;
+  }
+
+  .summary-item span,
+  .summary-total span,
+  .item-name,
+  .item-quantity,
+  .item-total {
+    font-size: 0.8rem;
+  }
+
+  .checkout-btn {
+    font-size: 0.9rem;
+  }
+}

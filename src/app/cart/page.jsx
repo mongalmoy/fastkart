@@ -72,7 +72,7 @@ function Cart() {
     })).then((data) => {
       const totalCnt = data?.reduce((tot, el) => tot += el?.quantity, 0)
       dispatch(setCartCount(totalCnt))
-      setCartList(data);
+      setCartList(data?.map(el => ({...el, isChecked: false})));
       loading(false)
     }).finally(() => {
       loading(false)

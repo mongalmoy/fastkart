@@ -17,21 +17,17 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppContext } from "@/components/context/WrapperContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addItemToCart,
-  removeItemToCart,
-} from "@/react-redux/slices/carts/cartSlice";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { getCartList } from "@/app/cart/page";
 import axios from "axios";
 import { apis } from "@/lib/constants";
+import { setCheckoutData } from "@/react-redux/slices/checkout/checkoutSlice";
 // import { Popconfirm } from "antd";
 
 const ShoppingCart = ({
@@ -53,10 +49,10 @@ const ShoppingCart = ({
 
   // /********************** useState starts***************************/
   const [showDelBtn, setShowDelBtn] = useState(false);
-
   // /********************** useState ends ***************************/
 
-  // console.log(cartListRef.current);
+  console.log(cartListRef.current);
+  console.log("cartList", cartList)
 
   const totalCartItems = cartList?.reduce(
     (total, el) => (total += Number(el?.quantity)),
@@ -124,6 +120,16 @@ const ShoppingCart = ({
       ) > 0
     );
   };
+
+  const handleCheckOut = () => {
+    const checkoutItems = cartList?.map((el,ind) => {
+      const cartId = cartListRef.current?.[ind]?.id;
+      return {...el, cartId: cartId}
+    })?.filter(el => el?.isChecked)
+    console.log("checkoutItems", checkoutItems)
+    dispatch(setCheckoutData(checkoutItems))
+    router.push("/checkout")
+  }
 
   return (
     <div className="shopping_cart_container">
@@ -214,7 +220,13 @@ const ShoppingCart = ({
                         height: "16px",
                       }}
                       checked={el?.isChecked}
-                      onChange={() => handleChangeInput(el?.id, el?.size)}
+                      onChange={() => {
+                        handleChangeInput(el?.id, el?.size);
+                        setCartList((prev) => {
+                          prev[index] = {...prev[index], isChecked: !prev[index]?.isChecked}
+                          return [...prev]
+                        })
+                      }}
                     />
                   </TableCell>
                   <TableCell align="left">
@@ -327,7 +339,9 @@ const ShoppingCart = ({
           <Button>
             <Link href="/">Home</Link>
           </Button>
-          <Button variant="contained">Checkout</Button>
+          <Button variant="contained" onClick={() => {
+            handleCheckOut()
+          }}>Checkout</Button>
         </div>
         {/* <LoadingButton loading loadingPosition="start" startIcon={<SaveIcon />}>
           Save
