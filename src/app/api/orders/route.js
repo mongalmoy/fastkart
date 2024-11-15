@@ -15,7 +15,17 @@ export async function GET() {
       [userId]
     );
 
-    return new Response(JSON.stringify(orders.rows), {
+    const totalOrders = await Promise.all(orders?.rows?.map(async (el) => {
+      const orderDescriptionList = await pool.query(
+        `SELECT * FROM ${db_tables.orders_desc.name} WHERE order_id=$1`, [
+          el?.id || ""
+        ]
+      )
+      el["orderDescription"] = orderDescriptionList?.rows;
+      return el;
+    }))
+
+    return new Response(JSON.stringify(totalOrders), {
       status: 200,
       headers: {
         "Content-Type": "application/json",

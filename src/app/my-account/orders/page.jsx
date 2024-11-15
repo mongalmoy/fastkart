@@ -18,8 +18,6 @@ const MyOrders = () => {
               <th>Sl No:</th>
               <th>Due Amount:</th>
               <th>Invoice no:</th>
-              <th>Qty:</th>
-              <th>Size</th>
               <th>Order Date:</th>
               <th>Paid/Unpaid</th>
               <th>Status</th>

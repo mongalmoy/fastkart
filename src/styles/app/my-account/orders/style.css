@@ -74,10 +74,16 @@
   font-size: 12px;
   transition: background-color 0.3s ease;
 }
+.status-button:disabled {
+  background-color: #007bff;
+}
 
 .status-button:hover {
   /* background-color: #0056b3; */
   background-color: #419541;
+}
+.status-button:disabled:hover {
+  background-color: #007bff;
 }
 
 
