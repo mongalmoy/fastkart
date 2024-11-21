@@ -13,6 +13,13 @@
 .userProfileCard:hover {
   /* transform: translateY(-5px); */
 }
+.user_img_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
 
 .profile-image {
   width: 100px;
@@ -21,16 +28,31 @@
   object-fit: cover;
   margin: 10px auto;
   transition: transform 0.3s ease;
+  border: 3px solid #d4d4d4;
 }
 
 .profile-image:hover {
   transform: scale(1.1);
 }
 
+.upload_image_icon {
+  position: absolute;
+  right: 44px;
+  bottom: 0px;
+  font-size: 20px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #d1d1d1;
+  cursor: pointer;
+}
+
 .user-name {
   font-size: 18px;
   color: #333;
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
   transition: color 0.3s ease;
 }
 
@@ -69,6 +91,11 @@
   transform: translateX(10px);
 }
 
+#transition-modal-title {
+  margin-bottom: 28px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #aeaeae;
+}
 
 /** Screen width below 600px **/
 @media screen and (width < 600px) {
@@ -82,41 +109,57 @@
   .user-name {
     display: none;
   }
-  .profile-image {
+  .profile-image,
+  .profile_image_skeleton {
     width: 50px !important;
     height: 50px !important;
     margin: 6px 12px !important;
+  }
+  .upload_image_icon {
+    right: 8px;
+    bottom: 5px;
+    font-size: 16px;
+    padding: 2px;
   }
   .menu-list {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 13px;
     padding: 0 12px;
   }
   .menu-item {
     flex-direction: column;
     margin: 0;
+    width: 20%;
   }
   .menu-item svg {
     margin: 0;
-    font-size: 16px;
+    font-size: 24px;
   }
   .menu-item span {
     font-size: 10px;
   }
 }
 
+/** Screen width below 470px **/
+@media screen and (width < 470px) {
+  .menu-list {
+    gap: 10px;
+  }
+}
 
 /** Screen width below 450px **/
 @media screen and (width < 450px) {
   .menu-list {
     padding: 0 12px;
+    gap: 6px;
   }
   .menu-item svg {
     margin: 0;
+    font-size: 20px;
   }
   .menu-item span {
-    font-size: 6px;
+    font-size: 10px;
   }
 }

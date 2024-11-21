@@ -29,6 +29,7 @@ export const config = {
     "/product",
     "/cart",
     "/my-account",
+    "/my-account/orders",
     "/my-account/edit",
     "/my-account/change-password",
     "/my-account/delete",

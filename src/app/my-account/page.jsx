@@ -1,29 +1,17 @@
 "use client";
 
-import { apis } from "@/lib/constants";
+import { AppContext } from "@/components/context/WrapperContext";
 import "@/styles/app/my-account/edit/style.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { Skeleton } from "@mui/material";
+import { useContext } from "react";
 import { useSelector } from "react-redux";
 
+const CustomSkeleton = <Skeleton animation="wave" style={{ width: "50%" }} />;
+
 const MyAccount = () => {
-  // const [userInfo, setUserInfo] = useState({});
+  const {loader} = useContext(AppContext)
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const userRes = await axios.get(apis.SERVER_BASE_URL + "api/user");
-  //       if (userRes.status === 200) {
-  //         setUserInfo(userRes.data);
-  //       }
-  //     } catch(error) {
-  //       console.log(error);
-  //       setUserInfo({});
-  //     }
-  //   })();
-  // }, []);
-
-  const userInfo = useSelector(state => state?.user?.userDetails)
+  const userInfo = useSelector((state) => state?.user?.userDetails);
 
   return (
     <div className="edit-account-container">
@@ -31,35 +19,35 @@ const MyAccount = () => {
       <div className="edit-account-form">
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <h6>{userInfo?.name}</h6>
+          {!loader ? <h6>{userInfo?.name}</h6> : CustomSkeleton}
         </div>
         <div className="form-group">
           <label htmlFor="dob">Date of Birth</label>
-          <h6>{userInfo?.dob}</h6>
+          {!loader ? <h6>{userInfo?.dob}</h6> : CustomSkeleton}
         </div>
         <div className="form-group">
           <label htmlFor="email">Email Address</label>
-          <h6>{userInfo?.email}</h6>
+          {!loader ? <h6>{userInfo?.email}</h6> : CustomSkeleton}
         </div>
         <div className="form-group">
           <label htmlFor="country">Country</label>
-          <h6>{userInfo?.country}</h6>
+          {!loader ? <h6>{userInfo?.country}</h6> : CustomSkeleton}
         </div>
         <div className="form-group">
           <label htmlFor="city">City</label>
-          <h6>{userInfo?.city}</h6>
+          {!loader ? <h6>{userInfo?.city}</h6> : CustomSkeleton}
         </div>
         <div className="form-group">
           <label htmlFor="contact">Contact</label>
-          <h6>{userInfo?.contact}</h6>
+          {!loader ? <h6>{userInfo?.contact}</h6> : CustomSkeleton}
         </div>
         <div className="form-group">
           <label htmlFor="address">Address</label>
-          <h6>{userInfo?.address}</h6>
+          {!loader ? <h6>{userInfo?.address}</h6> : CustomSkeleton}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MyAccount
+export default MyAccount;
