@@ -19,6 +19,13 @@ export async function GET() {
     // The fileId for the userImg
     const fileId = getUserImg.rows[0].userimg_id;
 
+    if(!fileId) {
+      return new Response(
+        JSON.stringify({ success: true, base64Img: "" }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     // Decode google drive service account base64 from env
     const base64Key = process.env.GOOGLE_DRIVE_SERVICE_ACCOUNT_BASE64;
 
