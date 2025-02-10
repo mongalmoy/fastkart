@@ -52,7 +52,7 @@ const ShoppingCart = ({
   // /********************** useState ends ***************************/
 
   console.log(cartListRef.current);
-  console.log("cartList", cartList)
+  console.log("cartList", cartList);
 
   const totalCartItems = cartList?.reduce(
     (total, el) => (total += Number(el?.quantity)),
@@ -122,14 +122,20 @@ const ShoppingCart = ({
   };
 
   const handleCheckOut = () => {
-    const checkoutItems = cartList?.map((el,ind) => {
-      const cartId = cartListRef.current?.[ind]?.id;
-      return {...el, cartId: cartId}
-    })?.filter(el => el?.isChecked)
-    console.log("checkoutItems", checkoutItems)
-    dispatch(setCheckoutData(checkoutItems))
-    router.push("/checkout")
-  }
+    const checkoutItems = cartList
+      ?.map((el, ind) => {
+        const cartId = cartListRef.current?.[ind]?.id;
+        return { ...el, cartId: cartId };
+      })
+      ?.filter((el) => el?.isChecked);
+    console.log("checkoutItems", checkoutItems);
+    if (checkoutItems.length === 0) {
+      toast?.error("Please select atleast one cart item to proceed.");
+      return;
+    }
+    dispatch(setCheckoutData(checkoutItems));
+    router.push("/checkout");
+  };
 
   return (
     <div className="shopping_cart_container">
@@ -223,9 +229,12 @@ const ShoppingCart = ({
                       onChange={() => {
                         handleChangeInput(el?.id, el?.size);
                         setCartList((prev) => {
-                          prev[index] = {...prev[index], isChecked: !prev[index]?.isChecked}
-                          return [...prev]
-                        })
+                          prev[index] = {
+                            ...prev[index],
+                            isChecked: !prev[index]?.isChecked,
+                          };
+                          return [...prev];
+                        });
                       }}
                     />
                   </TableCell>
@@ -253,10 +262,6 @@ const ShoppingCart = ({
                       <a
                         className="plus_minus_icon_holder"
                         onClick={async () => {
-                          // dispatch(
-                          //   removeItemToCart([{ id: el?.id, count: 1 }])
-                          // );
-                          // toast?.success("One item reduced from cart");
                           await handleManageItemToCart("remove", el);
                         }}
                       >
@@ -266,14 +271,6 @@ const ShoppingCart = ({
                       <a
                         className="plus_minus_icon_holder"
                         onClick={async () => {
-                          // dispatch(
-                          //   addItemToCart({
-                          //     item: el,
-                          //     itemCnt: 1,
-                          //   })
-                          // );
-                          // toast?.success("One more item added to cart");
-                          // router.push("/cart");
                           await handleManageItemToCart("add", el);
                         }}
                       >
@@ -293,28 +290,6 @@ const ShoppingCart = ({
               );
             })}
           </TableBody>
-          {/* <TableFooter>
-            <TableRow>
-              <TableCell align="left">
-                <Typography color={"#000"} fontSize={17} variant="subtitle2">
-                  Total
-                </Typography>
-              </TableCell>
-              {Array.from({ length: 4 }).map((_,ind) => ind+1).map((el) => (
-                <TableCell key={el?.toString()}></TableCell>
-              ))}
-              <TableCell align="left">
-                <Typography color={"#000"} fontSize={17} variant="subtitle2">
-                  {"₹  "}
-                  {cartList?.reduce(
-                    (total, el) =>
-                      (total += Number(el?.price) * Number(el?.quantity)),
-                    0
-                  )}
-                </Typography>
-              </TableCell>
-            </TableRow>
-          </TableFooter> */}
         </Table>
       </TableContainer>
 
@@ -339,13 +314,15 @@ const ShoppingCart = ({
           <Button>
             <Link href="/">Home</Link>
           </Button>
-          <Button variant="contained" onClick={() => {
-            handleCheckOut()
-          }}>Checkout</Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              handleCheckOut();
+            }}
+          >
+            Checkout
+          </Button>
         </div>
-        {/* <LoadingButton loading loadingPosition="start" startIcon={<SaveIcon />}>
-          Save
-        </LoadingButton> */}
       </ButtonGroup>
     </div>
   );
