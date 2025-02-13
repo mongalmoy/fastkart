@@ -107,3 +107,8 @@
     display: none;
   }
 }
+
+.footer_replaced {
+  height: 78px;
+  background-color: var(--homepage-bg);
+}

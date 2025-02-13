@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { message } from "antd";
 import { Providers } from "@/react-redux/provider";
 import { CircularProgress } from "@mui/material";
@@ -10,6 +10,16 @@ export const AppContext = createContext();
 const WrapperContext = ({ children }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loader, setLoader] = useState(false);
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("email");
+
+    if (userEmail) {
+      setUser(userEmail);
+    }
+  }, []);
 
   const success = (msg) => {
     messageApi.open({
@@ -32,17 +42,18 @@ const WrapperContext = ({ children }) => {
   };
 
   const loading = (val) => {
-    console.log("loading triggered...........")
-    setLoader(val)
-  }
+    console.log("loading triggered...........");
+    setLoader(val);
+  };
 
   return (
     <Providers>
       <AppContext.Provider
         value={{
           toast: { success, error, warning },
-          loader, 
-          loading
+          loader,
+          loading,
+          user,
         }}
       >
         {children}
