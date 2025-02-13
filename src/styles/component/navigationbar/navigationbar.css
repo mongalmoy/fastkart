@@ -9,7 +9,7 @@
   position: sticky;
   top: var(--header-height);
   width: 100%;
-  z-index: 99;
+  z-index: 1;
 }
 .app_logo {
   font-size: 28px;

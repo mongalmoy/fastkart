@@ -7,6 +7,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { footerData } from "@/data/footer/footer";
+import NewsLetter from "./NewsLetter";
 
 const Footer = () => {
   const page = footerData.page;
@@ -45,12 +46,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-column">
-          <h3>Get the News</h3>
-          <form className="subscribe-form">
-            <input type="email" placeholder="Enter your email" required />
-            <input type="submit" value="Subscribe" />
-          </form>
-          <h3 className="mt-2 mb-4">Keep In Touch</h3>
+          <NewsLetter />
+
           <div className="social-icons">
             <a href="#">
               <FaGithub />

@@ -67,7 +67,7 @@
   flex: 1;
 }
 
-.subscribe-form input[type="submit"] {
+.subscribe_form_btn {
   padding: 10px 20px;
   border: none;
   background-color: #333;
@@ -76,7 +76,7 @@
   cursor: pointer;
 }
 
-.subscribe-form input[type="submit"]:hover {
+.subscribe_form_btn:hover {
   background-color: #555;
 }
 

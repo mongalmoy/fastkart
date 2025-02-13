@@ -8,7 +8,7 @@ import axios from "axios";
 import { AppContext } from "@/components/context/WrapperContext";
 import { CircularProgress } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setUserId } from "@/react-redux/slices/users/userSlice";
+import { setUserEmail, setUserId } from "@/react-redux/slices/users/userSlice";
 
 const Entry = ({ isLogin }) => {
   const GlobalContext = useContext(AppContext);
@@ -50,11 +50,13 @@ const Entry = ({ isLogin }) => {
         toast?.success(response.data?.message);
 
         dispatch(setUserId(response.data?.user?.id));
+        dispatch(setUserEmail(response.data?.user?.email));
+        localStorage.setItem("email", response.data?.user?.email);
 
         // redirecting to homepage
         setTimeout(() => {
-          router.push("/")
-        }, 100)
+          router.push("/");
+        }, 100);
       } else {
         toast?.error(response.data?.message);
       }
@@ -74,16 +76,19 @@ const Entry = ({ isLogin }) => {
       const response = await axios.post("api/auth/login", userInfo);
       setLoading(false);
 
-      // console.log("response", response)
+      console.log("response", response);
 
       if (response.status === 200) {
         toast?.success(response.data?.message);
-        
+
         dispatch(setUserId(response.data?.user?.id));
+        dispatch(setUserEmail(response.data?.user?.email));
+        localStorage.setItem("email", response.data?.user?.email);
+
         // redirecting to homepage
         setTimeout(() => {
-          router.push("/")
-        }, 100)
+          router.push("/");
+        }, 100);
       } else {
         toast?.error(response.data?.message);
       }
