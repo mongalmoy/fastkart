@@ -5,6 +5,7 @@ import { AppContext } from "../../components/context/WrapperContext";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import SendNewsletter from "./SendNewsletter/SendNewsletter";
+import { FaSpinner } from "react-icons/fa";
 
 const NewsLetter = () => {
   const GlobalContext = useContext(AppContext);
@@ -32,6 +33,7 @@ const NewsLetter = () => {
 
       if (subscribeRes.status === 201) {
         toast?.success(subscribeRes?.data?.message);
+        setNewsletterEmail("");
       } else {
         toast?.error(subscribeRes?.data?.message);
       }
@@ -68,8 +70,8 @@ const NewsLetter = () => {
           value={newsletterEmail || ""}
           onChange={(e) => setNewsletterEmail(e.target.value)}
         />
-        <button className="subscribe_form_btn" type="submit">
-          Subscribe
+        <button className="subscribe_form_btn flexbox" type="submit">
+          {loader ? "Subscribing..." : "Subscribe"}
         </button>
       </form>
       <h3 className="mt-2 mb-4">Keep In Touch</h3>
