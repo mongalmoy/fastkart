@@ -16,7 +16,7 @@ const NewsLetter = () => {
     setUserEmail(localStorage.getItem("email"));
   }, []);
 
-  const [newsletterEmail, setNewsletterEmail] = useState(null);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
   const [showNewsletterBox, setShowNewsletterBox] = useState(false);
 
   const handleSubmitNewsletterEmail = async (e) => {
@@ -65,7 +65,7 @@ const NewsLetter = () => {
           type="email"
           placeholder="Enter your email"
           required
-          value={newsletterEmail}
+          value={newsletterEmail || ""}
           onChange={(e) => setNewsletterEmail(e.target.value)}
         />
         <button className="subscribe_form_btn" type="submit">
