@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/WrapperContext";
+import { AppContext } from "../../components/context/WrapperContext";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import SendNewsletter from "./SendNewsletter/SendNewsletter";
@@ -10,11 +10,13 @@ const NewsLetter = () => {
   const GlobalContext = useContext(AppContext);
   const { toast, loader, loading } = GlobalContext;
 
+  const user = useSelector((state) => state.user);
+
   const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
     setUserEmail(localStorage.getItem("email"));
-  }, []);
+  }, [user?.email]);
 
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [showNewsletterBox, setShowNewsletterBox] = useState(false);
@@ -37,8 +39,6 @@ const NewsLetter = () => {
       console.log("Nesletter subscription error ===>", error);
     }
   };
-
-  console.log(userEmail);
 
   return userEmail === "admin@fastkart.com" ? (
     <>

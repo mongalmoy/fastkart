@@ -7,7 +7,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { footerData } from "@/data/footer/footer";
-import NewsLetter from "./NewsLetter";
+import NewsLetter from "../../page/NewsLetter/Newsletter.jsx";
 
 const Footer = () => {
   const page = footerData.page;
